@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import styled, { createGlobalStyle } from "styled-components";
+import Header from "./components/Header";
+import SignInForm from "./components/forms/SignInForm";
+import PrivateRoutes from "./utils/PrivateRoutes";
+import HomePage from "./pages/HomePage";
+import FarmsPage from "./pages/Farm/FarmsPage";
+import FieldsPage from "./pages/FieldsPage";
+import ProcessingsPage from "./pages/ProcessingsPage";
+import FarmDetailsPage from "./pages/Farm/FarmDetails/FarmDetailsPage";
+
+const MainHolder = styled.section`
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+`;
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+
+  div, input, section {
+    box-sizing: border-box;
+  }
+`;
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BrowserRouter>
+      <GlobalStyle />
+      <MainHolder>
+        <Header />
+        <Routes>
+          <Route element={<PrivateRoutes />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/farm" element={<FarmsPage />} />
+            <Route path="/farm/:farmId" element={<FarmDetailsPage />} />
+            <Route path="/field" element={<FieldsPage />} />
+            <Route path="/processing" element={<ProcessingsPage />} />
+          </Route>
+          <Route path="/user/signin" element={<SignInForm />} />
+        </Routes>
+      </MainHolder>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
