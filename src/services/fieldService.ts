@@ -21,6 +21,28 @@ export const fetchFields = async (): Promise<Field[]> => {
   }
 };
 
+
+export const fetchFieldDetails = async (fieldId: string | undefined) => {
+  try {
+    const response = await fetch(`${BASE_URL}/field/${fieldId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch field details');
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error('Error during fetch field details:', error);
+    throw error;
+  }
+};
+
+
 export const fetchFieldsByFarmId = async (
   farmId: string | undefined
 ): Promise<Field[]> => {

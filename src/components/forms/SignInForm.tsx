@@ -64,12 +64,14 @@ export default function SignInForm() {
           <h2>Sign In</h2>
           <Input
             type="text"
+            name="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             label="Username"
           />
           <Input
             type="password"
+            name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             label="Password"

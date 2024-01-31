@@ -40,3 +40,35 @@ export const fetchFarms = async (): Promise<Farm[]> => {
       throw error;
     }
   };
+
+
+  export const createFarm = async (
+    name: string,
+    latitude: string,
+    longitude: string,
+    // soilId: string
+  ): Promise<Farm> => {
+    try {
+      const response = await fetch(`${BASE_URL}/farm`, {
+        method: 'POST',
+        headers: {Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          latitude,
+          longitude,
+          // soilId,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Failed to create farm: ${response.statusText}`);
+      }
+  
+      return await response.json();
+    } catch (error) {
+      console.error(`Failed to create farm: `, error);
+      throw error;
+    }
+  };

@@ -28,10 +28,16 @@ export interface Machine {
   deleted: Date;
 }
 
+export type BorderType = "Polygon" ;
 export interface Field {
   id: string;
   name: string;
-  farmId: number;
+  farmId: string;
+  soilId: string
+  borders: {
+    type: BorderType;
+    coordinates: number[][][];
+  };
   created: Date;
   updated: Date;
   deleted: Date;

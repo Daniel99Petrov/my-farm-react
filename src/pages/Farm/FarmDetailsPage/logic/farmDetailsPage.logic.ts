@@ -1,12 +1,17 @@
 import { useEffect, useRef, useState } from "react";
-import { fetchFarmDetails } from "../../../services/farmService";
-import { fetchFieldsByFarmId } from "../../../services/fieldService";
+import { fetchFarmDetails } from "../../../../services/farmService";
+import { fetchFieldsByFarmId } from "../../../../services/fieldService";
+import { fetchMachinesByFarmId } from "../../../../services/machineService";
+import { Farm, Field, Machine } from "../../../../types/types";
+import L from "leaflet";
+import useToggle from "../../../../hooks/Toggle";
 
-export const FarmDetailsPageLogic = (farmId: string) => {
+export const FarmDetailsPageLogic = (farmId: string | undefined) => {
   const [farm, setFarm] = useState<Farm | null>(null);
   const [fields, setFields] = useState<Field[]>([]);
   const [machines, setMachines] = useState<Machine[]>([]);
   const mapRef = useRef<L.Map | null>(null);
+  const [showFields, toggleShowFields] = useToggle(true);
 
   useEffect(() => {
     const loadFarmDetails = async () => {
@@ -60,6 +65,8 @@ export const FarmDetailsPageLogic = (farmId: string) => {
     farm,
     fields,
     machines,
+    showFields,
+    toggleShowFields,
     handleUpdateFarmInfo: (id: string) => console.log(id),
   };
 };

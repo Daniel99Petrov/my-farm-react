@@ -26,6 +26,7 @@ const StyledLabel = styled.label`
 
 interface InputProps {
   type: string;
+  name: string
   value: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
@@ -49,6 +50,7 @@ export default function Input(props: InputProps) {
     <StyledInputWrapper>
       <StyledInput
         type={props.type}
+        name={props.name}
         value={props.value}
         onChange={props.onChange}
         placeholder={props.placeholder}

@@ -5,19 +5,20 @@ import "leaflet/dist/leaflet.css";
 import FieldCardsContainer from "../../../components/cards/field_card/FieldCardsContainer";
 import farmIcon from "../../../assets/icons/farm.png";
 import {
+  BigBlueButton,
   MapDetailsContainer,
   PageTitle,
+  TitleImage,
+  UpdateButtonContainer,
 } from "../../../ui_elements/CommonStyledElements";
 import FarmDetailsInfo from "./FarmDetailsInfo";
 import {
-  BigBlueButton,
   DetailsInfoContainer,
   StyledMap,
-  UpdateButtonContainer,
-} from "./farmDetailsInfo.styles";
-import { TitleImage, ToggleButtonsContainer } from "./farmDetailsPage.style";
+} from "./styles/farmDetailsInfo.styles";
+import { ToggleButtonsContainer } from "./styles/farmDetailsPage.styles";
 import MachineCardsContainer from "../../../components/cards/machine_card/MachineCardsContainer";
-import { FarmDetailsPageLogic } from "./farmDetailsPage.logic";
+import { FarmDetailsPageLogic } from "./logic/farmDetailsPage.logic";
 
 const FarmDetailsPage = () => {
   const { farmId } = useParams();

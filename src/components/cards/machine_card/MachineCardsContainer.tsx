@@ -3,16 +3,20 @@ import { FieldCardsContainerWrapper } from "../field_card/fieldCardContainer.sty
 import MachineCard from "./MachineCard";
 import { MachineCardContainerProps } from "./machineCard.style";
 
-const MachineCardsContainer = ({ machines }:MachineCardContainerProps) => {
-    return (
-      <Container>
-          <FieldCardsContainerWrapper>
-          {machines.map((machine) => (
+const MachineCardsContainer = ({ machines }: MachineCardContainerProps) => {
+  return (
+    <Container>
+      <FieldCardsContainerWrapper>
+        {machines && machines.length > 0 ? (
+          machines.map((machine) => (
             <MachineCard key={machine.id} machine={machine} />
-          ))}
+          ))
+        ) : (
+          <p>No machines available!</p>
+        )}
       </FieldCardsContainerWrapper>
-        </Container>
-    );
-  };
-  
-  export default MachineCardsContainer;
+    </Container>
+  );
+};
+
+export default MachineCardsContainer;

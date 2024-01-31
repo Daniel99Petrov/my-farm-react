@@ -4,10 +4,12 @@ import Header from "./components/Header";
 import SignInForm from "./components/forms/SignInForm";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import HomePage from "./pages/HomePage";
-import FarmsPage from "./pages/Farm/FarmsPage";
-import FieldsPage from "./pages/FieldsPage";
+import FarmsPage from "./pages/Farm/FarmsPage/FarmsPage";
+import FieldsPage from "./pages/Field/FieldsPage/FieldsPage";
 import ProcessingsPage from "./pages/ProcessingsPage";
-import FarmDetailsPage from "./pages/Farm/FarmDetails/FarmDetailsPage";
+import FarmDetailsPage from "./pages/Farm/FarmDetailsPage/FarmDetailsPage";
+import CreateFarmPage from "./pages/Farm/CreateFarmPage/CreateFarmPage";
+import FieldDetailsPage from "./pages/Field/FieldDetailsPage/FieldDetailsPage";
 
 const MainHolder = styled.section`
   width: 100%;
@@ -46,6 +48,8 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/farm" element={<FarmsPage />} />
             <Route path="/farm/:farmId" element={<FarmDetailsPage />} />
+            <Route path="/field/:fieldId" element={<FieldDetailsPage />} />
+            <Route path="/farm-create" element={<CreateFarmPage />} />
             <Route path="/field" element={<FieldsPage />} />
             <Route path="/processing" element={<ProcessingsPage />} />
           </Route>

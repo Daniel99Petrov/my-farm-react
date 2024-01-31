@@ -21,6 +21,41 @@ export const RedButton = styled(GreenButton)`
   }
 `;
 
+export const BigBlueButton = styled(GreenButton)`
+  background-color: #004499;
+  &:hover {
+    background-color: #0044cc;
+  }
+`;
+
+export const UpdateButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+`;
+
+export const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
+  margin: 10% auto;
+  gap: 16px;
+  cursor: pointer;
+  padding: 12px 16px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 5px 30px 5px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 360px) {
+    max-width: 100%; 
+    margin: 10% auto;
+    padding: 12px;
+  }
+`;
+
 export const FormItems = styled.form`
   display: flex;
   flex-direction: column;
@@ -33,6 +68,13 @@ export const Container = styled.div`
   margin: auto;
   padding: 0 2rem;
   overflow: hidden;
+`;
+
+export const PageMainButtonsContainer = styled(Container)`
+  margin: 50px auto 10px;
+  display: flex;
+justify-content: center;
+/* gap: 100px; */
 `;
 
 export const MapDetailsContainer = styled.div`
@@ -60,3 +102,8 @@ text-align: center;
 margin: 20px;
 font-size: 26px;
 `
+export const TitleImage = styled.img`
+  margin-right: 8px;
+  width: 40px;
+  height: 40px;
+`;

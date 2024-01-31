@@ -2,7 +2,7 @@ import DetailBullet from "../../../components/bullets/detail_bullet/DetailBullet
 import fieldIcon from "../../../assets/icons/field.png";
 import machineIcon from "../../../assets/icons/machine.png";
 import locationIcon from "../../../assets/icons/location.png";
-import { FarmDetailsInterface } from "./farmDetails.static";
+import { FarmDetailsInterface } from "./static/farmDetails.static";
 
 const FarmDetailsInfo = ({
   longitude,

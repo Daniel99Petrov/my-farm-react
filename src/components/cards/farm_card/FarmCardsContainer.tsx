@@ -7,9 +7,11 @@ const FarmCardsContainer = ({ farms }:FarmCardContainerProps) => {
     return (
       <Container>
           <FarmCardsContainerWrapper>
-          {farms.map((farm) => (
-            <FieldCard key={farm.id} farm={farm} />
-          ))}
+          {farms && farms.length > 0 ? (
+          farms.map((farm) => <FieldCard key={farm.id} farm={farm} />)
+        ) : (
+          <p>No farms available!</p>
+        )}
       </FarmCardsContainerWrapper>
         </Container>
     );
