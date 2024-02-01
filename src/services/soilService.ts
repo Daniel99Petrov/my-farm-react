@@ -40,3 +40,28 @@ export const fetchSoils = async (): Promise<Soil[]> => {
       throw error;
     }
   };
+
+  export const createSoil = async (
+    name: string,
+  ): Promise<Soil> => {
+    try {
+      const response = await fetch(`${BASE_URL}/soil`, {
+        method: 'POST',
+        headers: {Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Failed to create soil: ${response.statusText}`);
+      }
+  
+      return await response.json();
+    } catch (error) {
+      console.error(`Failed to create soil: `, error);
+      throw error;
+    }
+  };

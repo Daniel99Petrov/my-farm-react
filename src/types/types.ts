@@ -29,15 +29,18 @@ export interface Machine {
 }
 
 export type BorderType = "Polygon" ;
+export type FieldCoordinatesType = number[][][];
+export type FieldBordersType = {
+  type: BorderType;
+  coordinates: FieldCoordinatesType;
+}
+
 export interface Field {
   id: string;
   name: string;
   farmId: string;
-  soilId: string
-  borders: {
-    type: BorderType;
-    coordinates: number[][][];
-  };
+  soilId: string;
+  borders: FieldBordersType;
   created: Date;
   updated: Date;
   deleted: Date;

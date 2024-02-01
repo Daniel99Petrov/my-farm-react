@@ -69,38 +69,48 @@ export default function Navbar() {
   return (
     <StyledNav>
       <Container>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/farm">Farms</Link>
-        </li>
-        <li>
-          <Link to="/field">Fields</Link>
-        </li>
-        <li>
-          <Link to="/machine">Machines</Link>
-        </li>
-        <li>
-          <Link to="/processing">Processings</Link>
-        </li>
-        <AuthLinks>
-          <Link to="/user/signin">Sign In</Link>
-          <Link to="/user/signup">Register</Link>
-          <Link to="#" onClick={handleLogout}>
-            Logout
-          </Link>
-        </AuthLinks>
-        {/* <li></li> */}
-      </ul>
-      <LogoutModal
-        isOpen={isLogoutModalOpen}
-        onClose={handleCancelLogout}
-        onConfirm={handleConfirmLogout}
-      >
-        {modalMessage}
-      </LogoutModal>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/farm">Farms</Link>
+          </li>
+          <li>
+            <Link to="/field">Fields</Link>
+          </li>
+          <li>
+            <Link to="/machine">Machines</Link>
+          </li>
+          <li>
+            <Link to="/processing">Processings</Link>
+          </li>
+          <li>
+            <Link to="/crop">Crops</Link>
+          </li>
+          <li>
+            <Link to="/processing-type">Processing Types</Link>
+          </li>
+          <li>
+            <Link to="/soil">Soils</Link>
+          </li>
+
+          <AuthLinks>
+            <Link to="/user/signin">Sign In</Link>
+            <Link to="/user/signup">Register</Link>
+            <Link to="#" onClick={handleLogout}>
+              Logout
+            </Link>
+          </AuthLinks>
+          {/* <li></li> */}
+        </ul>
+        <LogoutModal
+          isOpen={isLogoutModalOpen}
+          onClose={handleCancelLogout}
+          onConfirm={handleConfirmLogout}
+        >
+          {modalMessage}
+        </LogoutModal>
       </Container>
     </StyledNav>
   );

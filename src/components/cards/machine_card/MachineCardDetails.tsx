@@ -1,11 +1,11 @@
-import { StyledFieldDetails } from "../field_card/fieldCardDetails.styles";
 import { MachineCardProps } from "./machineCard.static";
+import { StyledMachineDetails } from "./machineCard.style";
 
 export default function MachineDetails({ machine }: MachineCardProps) {
     return (
-      <StyledFieldDetails>
+      <StyledMachineDetails>
         {/* <CardIcon src={fieldIcon} alt="Field Icon" /> */}
         <h3>{machine.registrationNumber}</h3>
-      </StyledFieldDetails>
+      </StyledMachineDetails>
     );
   }

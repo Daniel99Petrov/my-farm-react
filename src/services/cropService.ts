@@ -20,3 +20,28 @@ export const fetchCrops = async (): Promise<Crop[]> => {
     throw error;
   }
 };
+
+export const createCrop = async (
+  name: string,
+): Promise<Crop> => {
+  try {
+    const response = await fetch(`${BASE_URL}/crop`, {
+      method: 'POST',
+      headers: {Authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to create Crop: ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error(`Failed to create Crop: `, error);
+    throw error;
+  }
+};

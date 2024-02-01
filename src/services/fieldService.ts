@@ -64,3 +64,41 @@ export const fetchFieldsByFarmId = async (
     throw error;
   }
 };
+
+export const createField = async (
+  name: string,
+  borders: {type: string, coordinates: number[][][]},
+  farmId: string,
+  soilId: string,
+): Promise<Field> => {
+  try {
+    console.log(borders);
+    console.log(JSON.stringify({
+      name,
+      borders,
+      farmId,
+      soilId,
+    }));
+    const response = await fetch(`${BASE_URL}/field`, {
+      method: 'POST',
+      headers: {Authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        borders,
+        farmId,
+        soilId,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to create field: ${response}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error(`Failed to create field: `, error);
+    throw error;
+  }
+};

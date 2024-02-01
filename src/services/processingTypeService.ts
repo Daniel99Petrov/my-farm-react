@@ -20,3 +20,28 @@ export const fetchProcessingTypes = async (): Promise<ProcessingType[]> => {
       throw error;
     }
   };
+
+  export const createProcessingType = async (
+    name: string,
+  ): Promise<ProcessingType> => {
+    try {
+      const response = await fetch(`${BASE_URL}/processing-type`, {
+        method: 'POST',
+        headers: {Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Failed to create ProcessingType: ${response.statusText}`);
+      }
+  
+      return await response.json();
+    } catch (error) {
+      console.error(`Failed to create ProcessingType: `, error);
+      throw error;
+    }
+  };

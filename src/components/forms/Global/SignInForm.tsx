@@ -5,7 +5,7 @@ import Input from "./Input";
 import {
   FormItems,
   GreenButton,
-} from "../../ui_elements/CommonStyledElements";
+} from "../../../ui_elements/CommonStyledElements";
 
 const FormContainer = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ const FormContainer = styled.div`
   box-shadow: 0px 5px 30px 5px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 360px) {
-    max-width: 100%; 
+    max-width: 100%;
     margin: 10% auto;
     padding: 12px;
   }

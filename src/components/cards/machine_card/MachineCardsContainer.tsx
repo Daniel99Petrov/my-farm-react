@@ -1,12 +1,11 @@
 import { Container } from "../../../ui_elements/CommonStyledElements";
-import { FieldCardsContainerWrapper } from "../field_card/fieldCardContainer.styles";
 import MachineCard from "./MachineCard";
-import { MachineCardContainerProps } from "./machineCard.style";
+import { MachineCardContainerProps, MachineCardsContainerWrapper } from "./machineCard.style";
 
 const MachineCardsContainer = ({ machines }: MachineCardContainerProps) => {
   return (
     <Container>
-      <FieldCardsContainerWrapper>
+      <MachineCardsContainerWrapper>
         {machines && machines.length > 0 ? (
           machines.map((machine) => (
             <MachineCard key={machine.id} machine={machine} />
@@ -14,7 +13,7 @@ const MachineCardsContainer = ({ machines }: MachineCardContainerProps) => {
         ) : (
           <p>No machines available!</p>
         )}
-      </FieldCardsContainerWrapper>
+      </MachineCardsContainerWrapper>
     </Container>
   );
 };
