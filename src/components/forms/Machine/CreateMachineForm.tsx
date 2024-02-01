@@ -79,7 +79,7 @@ const CreateMachineForm: React.FC<CreateMachineFormProps> = ({ onSubmit }) => {
           onChange={handleInputChange}
           label="Model"
         />
-        <OptionInput options={farms} label="Farm" onSelect={handleFarmSelect} />
+        <OptionInput options={farms} label="Farm" onSelect={handleFarmSelect} displayProperty="name"/>
         <GreenButton type="submit">Create Machine</GreenButton>
       </FormItems>
     </FormContainer>

@@ -4,11 +4,12 @@ import { fetchFarms } from "../../../services/farmService";
 import { useNavigate } from "react-router-dom";
 
 export const useFarmsPageLogic = () => {
+  const navigate = useNavigate();
+  
   const [farms, setFarms] = useState<Farm[]>([]);
   const [filteredFarms, setFilteredFarms] = useState<Farm[]>([]);
   const title = "All Farms";
   const searchPlaceholder = "Search farm..";
-  const navigate = useNavigate();
   const handleCreateFarm = () => {
     navigate("/farm-create");
   };

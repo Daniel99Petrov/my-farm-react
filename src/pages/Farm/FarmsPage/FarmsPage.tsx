@@ -11,7 +11,6 @@ import SearchBar from "../../../components/bars/searchBar/SearchBar";
 
 export default function FarmsPage() {
   const { farms, title, handleSearch, handleCreateFarm,searchPlaceholder } = useFarmsPageLogic();
-  
 
   return (
     <div>

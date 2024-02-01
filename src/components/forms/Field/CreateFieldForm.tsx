@@ -88,8 +88,8 @@ const CreateFieldForm: React.FC<CreateFieldFormProps> = ({ onSubmit }) => {
           onChange={handleInputChange}
           label="Coordinates"
         />
-        <OptionInput options={farms} label="Farm" onSelect={handleFarmSelect} />
-        <OptionInput options={soils} label="Soil" onSelect={handleSoilSelect} />
+        <OptionInput options={farms} label="Farm" onSelect={handleFarmSelect} displayProperty="name"/>
+        <OptionInput options={soils} label="Soil" onSelect={handleSoilSelect} displayProperty="name"/>
         <GreenButton type="submit">Create Field</GreenButton>
       </FormItems>
     </FormContainer>

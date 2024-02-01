@@ -83,12 +83,16 @@ export const fetchMachines = async (): Promise<Machine[]> => {
       });
   
       if (!response.ok) {
-        throw new Error(`Failed to create field: ${response}`);
+        // DONE
+        const errorData = await response.json();
+        const errorMessage = errorData?.error?.message || "Unknown error occurred";
+        console.error(`Failed to create machine: `, errorMessage);
+        throw new Error(`Failed to create machine: ${errorData}`);
       }
   
       return await response.json();
     } catch (error) {
-      console.error(`Failed to create field: `, error);
+      console.error(`Failed to create machine: `, error);
       throw error;
     }
   };

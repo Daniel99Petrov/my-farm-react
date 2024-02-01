@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LogoutModal from "./modals/ConfirmModal";
 import { Container } from "../ui_elements/CommonStyledElements";
+import { useAuth } from "../contexts/AuthContext";
 
 const StyledNav = styled.nav`
   ul {
@@ -47,13 +48,16 @@ export default function Navbar() {
   const modalMessage = `Are you sure you want to logout?`;
   const navigate = useNavigate();
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
-
+  
   const handleLogout = () => {
     // Open the logout confirmation modal
     setLogoutModalOpen(true);
   };
-
+  
   const handleConfirmLogout = () => {
+    // TODO logout actually removes the item from locStorage so I don't need setItem("")
+    const {logout} = useAuth();
+    logout();
     // Clear the authentication token from local storage
     localStorage.setItem("token", "");
     // Redirect to the home page or login page
@@ -102,7 +106,6 @@ export default function Navbar() {
               Logout
             </Link>
           </AuthLinks>
-          {/* <li></li> */}
         </ul>
         <LogoutModal
           isOpen={isLogoutModalOpen}

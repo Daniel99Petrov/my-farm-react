@@ -6,6 +6,7 @@ import {
   FormItems,
   GreenButton,
 } from "../../../ui_elements/CommonStyledElements";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const FormContainer = styled.div`
   display: flex;
@@ -29,32 +30,32 @@ const FormContainer = styled.div`
 export default function SignInForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSignIn = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetch("http://localhost:3000/user/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    })
-      .then(async (data) => {
-        const response = await data.json();
-        console.log(response);
-
-        if (data.status === 201) {
-          localStorage.setItem("token", response.access_token);
-          navigate("/");
-        } else {
-          // Handle sign-in failure
-          console.error("Sign-in failed. Unexpected status:", response.data);
-        }
-      })
-      .catch((error) => {
-        console.error("Error during sign-in:", error);
+    try {
+      const response = await fetch("http://localhost:3000/user/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
       });
+
+      if (response.status === 201) {
+        const data = await response.json();
+        // localStorage.setItem("token", data.access_token);
+        login(data.access_token)
+        navigate("/");
+      } else {
+        const errorData = await response.json();
+        console.error("Sign-in failed. Unexpected status:", errorData);
+      }
+    } catch (error) {
+      console.error("Error during sign-in:", error);
+    }
   };
 
   return (

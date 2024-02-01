@@ -22,6 +22,7 @@ import CreateProcessingTypePage from "./pages/ProcessingType/CreateProcessingTyp
 import CreateCropPage from "./pages/Crop/CreateCropPage/CreateCropPage";
 import CreateProcessingPage from "./pages/Processing/CreateProcessingPage/CreateProcessingPage";
 import { routes } from "./routes/routes";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const MainHolder = styled.section`
   width: 100%;
@@ -52,11 +53,12 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   return (
     <BrowserRouter>
+    <AuthProvider>
       <GlobalStyle />
       <MainHolder>
         <Header />
         <Routes>
-        <Route element={<PrivateRoutes />}>
+        {/* <Route element={<PrivateRoutes />}> */}
             <Route path={routes.welcome} element={<HomePage />} />
             <Route path={routes.farm} element={<FarmsPage />} />
             <Route path={routes.farmDetails} element={<FarmDetailsPage />} />
@@ -75,10 +77,11 @@ function App() {
             <Route path={routes.createCrop} element={<CreateCropPage />} />
             <Route path={routes.soil} element={<SoilsPage />} />
             <Route path={routes.createSoil} element={<CreateSoilPage />} />
-          </Route>
+          {/* </Route> */}
           <Route path={routes.signIn} element={<SignInForm />} />
         </Routes>
       </MainHolder>
+    </AuthProvider>
     </BrowserRouter>
   );
 }
