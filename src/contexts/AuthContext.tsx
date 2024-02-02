@@ -25,10 +25,6 @@ export const useAuth = () => {
   }
   return context;
 };
-export const isAuthenticated = () => {
-  const { isAuthenticated } = useAuth();
-  return isAuthenticated;
-};
 // Create a provider component
 interface AuthProviderProps {
   children: ReactNode;
@@ -48,7 +44,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         // Redirect to sign-in page if not authenticated
         setIsAuthenticated(false);
         navigate("/user/signin");
-      } else setIsAuthenticated(true);
+      } else {
+        if (!publicRoutes.includes(window.location.pathname)) {
+            setIsAuthenticated(true);
+          }
+      }
+    //   setIsAuthenticated(true);
     };
 
     checkAuth();

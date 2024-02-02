@@ -48,18 +48,19 @@ export default function Navbar() {
   const modalMessage = `Are you sure you want to logout?`;
   const navigate = useNavigate();
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
-  
+  const { isAuthenticated, logout } = useAuth();
+console.log(isAuthenticated);
+
   const handleLogout = () => {
     // Open the logout confirmation modal
     setLogoutModalOpen(true);
   };
-  
+
   const handleConfirmLogout = () => {
     // TODO logout actually removes the item from locStorage so I don't need setItem("")
-    const {logout} = useAuth();
     logout();
     // Clear the authentication token from local storage
-    localStorage.setItem("token", "");
+    // localStorage.setItem("token", "");
     // Redirect to the home page or login page
     navigate("/user/signin");
     // Close the logout confirmation modal
@@ -74,6 +75,8 @@ export default function Navbar() {
     <StyledNav>
       <Container>
         <ul>
+        {isAuthenticated && (
+          <>
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -98,13 +101,17 @@ export default function Navbar() {
           <li>
             <Link to="/soil">Soils</Link>
           </li>
+          </>
+          )}
 
           <AuthLinks>
-            <Link to="/user/signin">Sign In</Link>
-            <Link to="/user/signup">Register</Link>
-            <Link to="#" onClick={handleLogout}>
-              Logout
-            </Link>
+            {!isAuthenticated && <Link to="/user/signin">Sign In</Link>}
+            {!isAuthenticated && <Link to="/user/signup">Register</Link>}
+            {isAuthenticated && (
+              <Link to="#" onClick={handleLogout}>
+                Logout
+              </Link>
+            )}
           </AuthLinks>
         </ul>
         <LogoutModal
