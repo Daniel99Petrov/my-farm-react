@@ -49,7 +49,6 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
   const { isAuthenticated, logout } = useAuth();
-console.log(isAuthenticated);
 
   const handleLogout = () => {
     // Open the logout confirmation modal

@@ -48,7 +48,7 @@ export default function SignInForm() {
         const data = await response.json();
         // localStorage.setItem("token", data.access_token);
         login(data.access_token)
-        navigate("/");
+        navigate("/", {replace: true});
       } else {
         const errorData = await response.json();
         console.error("Sign-in failed. Unexpected status:", errorData);

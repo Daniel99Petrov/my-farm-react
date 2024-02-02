@@ -3,7 +3,7 @@ import { apiEndpoints } from "../static/routes/apiEndpoints";
 import { Farm } from "../static/types/types";
 
 
-const getFarmsEndpoint = apiEndpoints.farm;
+export const getFarmsEndpoint = apiEndpoints.farm;
 const getFarmDetailsEndpoint = apiEndpoints.farmDetails;
 const createFarmEndpoint = apiEndpoints.createFarm;
 

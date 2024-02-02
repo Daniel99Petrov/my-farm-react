@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const GreenButton = styled.button`
   padding: 10px 15px;
@@ -106,4 +106,23 @@ export const TitleImage = styled.img`
   margin-right: 8px;
   width: 40px;
   height: 40px;
+`;
+export const LoadingContainer = styled.div<{ $isLoading: boolean }>`
+  ${({ $isLoading }) =>
+    $isLoading &&
+    css`
+      filter: blur(5px); /* Adjust the blur intensity as needed */
+    `}
+`;
+
+export const LoadingText = styled.p`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: white;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 16px;
+  border-radius: 8px;
 `;

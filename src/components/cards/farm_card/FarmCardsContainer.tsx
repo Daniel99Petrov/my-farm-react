@@ -1,5 +1,5 @@
 import { Container } from "../../../ui_elements/CommonStyledElements";
-import FieldCard from "./FarmCard";
+import FarmCard from "./FarmCard";
 import { FarmCardContainerProps } from "./farmCardContainer.static";
 import { FarmCardsContainerWrapper } from "./farmCardContainer.styles";
 
@@ -8,7 +8,7 @@ const FarmCardsContainer = ({ farms }:FarmCardContainerProps) => {
       <Container>
           <FarmCardsContainerWrapper>
           {farms && farms.length > 0 ? (
-          farms.map((farm) => <FieldCard key={farm.id} farm={farm} />)
+          farms.map((farm) => <FarmCard key={farm.id} farm={farm} />)
         ) : (
           <p>No farms available!</p>
         )}

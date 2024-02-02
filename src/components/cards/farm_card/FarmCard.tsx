@@ -14,7 +14,7 @@ export default function FarmCard({ farm }: FarmCardProps) {
 
   return (
     <StyledFarmCard onClick={handleFarmClick}>
-      <FarmImage src={farmImg} alt="Farm" />
+      <FarmImage src={farmImg} alt="Farm"/>
       <FarmCardDetails farm={farm} />
     </StyledFarmCard>
   );

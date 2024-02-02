@@ -22,6 +22,7 @@ import CreateCropPage from "./pages/Crop/CreateCropPage/CreateCropPage";
 import CreateProcessingPage from "./pages/Processing/CreateProcessingPage/CreateProcessingPage";
 import { routes } from "./static/routes/routes";
 import { AuthProvider } from "./contexts/AuthContext";
+import Error from "./pages/Error/Error";
 
 const MainHolder = styled.section`
   width: 100%;
@@ -76,6 +77,7 @@ function App() {
             <Route path={routes.createCrop} element={<CreateCropPage />} />
             <Route path={routes.soil} element={<SoilsPage />} />
             <Route path={routes.createSoil} element={<CreateSoilPage />} />
+            <Route path={routes.notFound} element={<Error/>} />
           {/* </Route> */}
           <Route path={routes.signIn} element={<SignInForm />} />
         </Routes>

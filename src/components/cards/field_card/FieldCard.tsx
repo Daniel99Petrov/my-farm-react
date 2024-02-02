@@ -14,7 +14,7 @@ export default function FieldCard({ field }: FieldCardProps) {
 
   return (
     <StyledFieldCard onClick={handleFieldClick}>
-      <FieldImage src={fieldImg} alt="Field" />
+      <FieldImage src={fieldImg} alt="Field"/>
       <FieldCardDetails field={field} />
     </StyledFieldCard>
   );

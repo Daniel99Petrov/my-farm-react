@@ -20,4 +20,5 @@ export const routes = {
   soil: "/soil",
   createSoil: "/soil-create",
   signIn: "/user/signin",
+  notFound: "/*",
 };
