@@ -1,4 +1,4 @@
-import { BorderType } from "../../../../types/types";
+import { BorderType } from "../../../../static/types/types";
 
 export interface FieldDetailsInterface {
   borders: {

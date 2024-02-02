@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import Header from "./components/Header";
 import SignInForm from "./components/forms/Global/SignInForm";
-import PrivateRoutes from "./utils/PrivateRoutes";
 import HomePage from "./pages/Home/HomePage";
 import FarmsPage from "./pages/Farm/FarmsPage/FarmsPage";
 import FieldsPage from "./pages/Field/FieldsPage/FieldsPage";
@@ -21,7 +20,7 @@ import CreateSoilPage from "./pages/Soil/CreateSoilPage/CreateSoilPage";
 import CreateProcessingTypePage from "./pages/ProcessingType/CreateProcessingTypePage/CreateProcessingTypePage";
 import CreateCropPage from "./pages/Crop/CreateCropPage/CreateCropPage";
 import CreateProcessingPage from "./pages/Processing/CreateProcessingPage/CreateProcessingPage";
-import { routes } from "./routes/routes";
+import { routes } from "./static/routes/routes";
 import { AuthProvider } from "./contexts/AuthContext";
 
 const MainHolder = styled.section`

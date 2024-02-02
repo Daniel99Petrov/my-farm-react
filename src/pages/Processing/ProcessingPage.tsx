@@ -6,7 +6,7 @@ import {
   Machine,
   Processing,
   ProcessingType,
-} from "../../types/types";
+} from "../../static/types/types";
 import styled from "styled-components";
 import { fetchProcessings } from "../../services/processingService";
 import { fetchProcessingTypes } from "../../services/processingTypeService";
@@ -14,8 +14,13 @@ import { fetchCrops } from "../../services/cropService";
 import { fetchMachines } from "../../services/machineService";
 import { fetchGrowingPeriods } from "../../services/growingPeriodService";
 import { fetchFields } from "../../services/fieldService";
-import { GreenButton, PageMainButtonsContainer, PageTitle, TitleImage } from "../../ui_elements/CommonStyledElements";
-import processingIcon from "../../assets/icons/processing.png"
+import {
+  GreenButton,
+  PageMainButtonsContainer,
+  PageTitle,
+  TitleImage,
+} from "../../ui_elements/CommonStyledElements";
+import processingIcon from "../../assets/icons/processing.png";
 import { useNavigate } from "react-router-dom";
 
 const Table = styled.table`
@@ -186,7 +191,9 @@ export default function ProcessingPage() {
       </PageTitle>
       <PageMainButtonsContainer>
         {/* <SearchBar placeholder={searchPlaceholder} onSearch={handleSearch} /> */}
-        <GreenButton onClick={handleCreateProcessing}>Create Processing</GreenButton>
+        <GreenButton onClick={handleCreateProcessing}>
+          Create Processing
+        </GreenButton>
       </PageMainButtonsContainer>
       <Table>
         {renderTableHeader()}

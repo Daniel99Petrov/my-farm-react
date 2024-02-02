@@ -1,12 +1,13 @@
-import { ProcessingType } from "../../types/types";
+import { ProcessingType } from "../../static/types/types";
 import UniversalTable from "./UniversalTable";
 
 interface ProcessingTypeTableProps {
-    processingTypes: ProcessingType[];
-  }
+  processingTypes: ProcessingType[];
+}
 
-const ProcessingTypeTable: React.FC<ProcessingTypeTableProps> = ({ processingTypes }) => {
-
+const ProcessingTypeTable: React.FC<ProcessingTypeTableProps> = ({
+  processingTypes,
+}) => {
   const columns = [
     { key: "name", header: "Name" },
     //   { key: "variety", header: "Variety" },

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Farm } from "../../../types/types";
+import { Farm } from "../../../static/types/types";
 
-import { Machine } from "../../../types/types";
+import { Machine } from "../../../static/types/types";
 import { fetchMachineDetails } from "../../../services/machineService";
 import { fetchFarmDetails } from "../../../services/farmService";
 
@@ -23,7 +23,6 @@ export const MachineDetailsPageLogic = (machineId: string | undefined) => {
   }, [machineId]);
 
   useEffect(() => {
-
     if (machine) {
       const loadFarm = async () => {
         try {
@@ -36,7 +35,6 @@ export const MachineDetailsPageLogic = (machineId: string | undefined) => {
       loadFarm();
     }
   }, [machine]);
-
 
   return {
     machine,

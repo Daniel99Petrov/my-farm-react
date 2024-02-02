@@ -1,9 +1,13 @@
-import { BASE_URL } from "../constants/constants";
-import { Crop } from "../types/types";
+import { apiEndpoints } from "../static/routes/apiEndpoints";
+import { BASE_URL } from "../static/constants/constants";
+import { Crop } from "../static/types/types";
+
+const getCropsEndpoint = apiEndpoints.crop;
+const createCropEndpoint = apiEndpoints.createCrop;
 
 export const fetchCrops = async (): Promise<Crop[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/crop`, {
+    const response = await fetch(`${BASE_URL}${getCropsEndpoint}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
@@ -21,17 +25,16 @@ export const fetchCrops = async (): Promise<Crop[]> => {
   }
 };
 
-export const createCrop = async (
-  name: string,
-): Promise<Crop> => {
+export const createCrop = async (name: string): Promise<Crop> => {
   try {
-    const response = await fetch(`${BASE_URL}/crop`, {
-      method: 'POST',
-      headers: {Authorization: `Bearer ${localStorage.getItem('token')}`,
-      'Content-Type': 'application/json',
+    const response = await fetch(`${BASE_URL}${createCropEndpoint}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name
+        name,
       }),
     });
 

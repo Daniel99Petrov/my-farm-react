@@ -1,0 +1,34 @@
+export const apiEndpoints = {
+  welcome: "/",
+  home: "/",
+  signIn: "/user/signin",
+  // FARM
+  farm: "/farm",
+  farmDetails: "/farm/:farmId",
+  createFarm: "/farm",
+  // FIELD
+  field: "/field",
+  fieldDetails: "/field/:fieldId",
+  fieldsByFarm: "/field/by-farm/:farmId",
+  createField: "/field",
+  // MACHINE
+  machine: "/machine",
+  machineDetails: "/machine/:machineId",
+  machinesByFarm: "/machine/by-farm/:farmId",
+  createMachine: "/machine",
+  // PROCESSING
+  processing: "/processing",
+  createProcessing: "/processing",
+  // PROCESSING-TYPE
+  processingType: "/processing-type",
+  createProcessingType: "/processing-type",
+  // CROP
+  crop: "/crop",
+  createCrop: "/crop",
+  // SOIL
+  soil: "/soil",
+  soilDetails: "/soil/:soilId",
+  createSoil: "/soil",
+  // GROWING-PERIOD
+  growingPeriod: "/growing-period",
+};

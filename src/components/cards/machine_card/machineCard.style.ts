@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Machine } from "../../../types/types";
+import { Machine } from "../../../static/types/types";
 
 export const MachineImage = styled.img`
   width: 100%;
@@ -8,10 +8,10 @@ export const MachineImage = styled.img`
 `;
 
 export interface MachineCardContainerProps {
-    machines: Machine[];
-  }
+  machines: Machine[];
+}
 
-  export const MachineCardsContainerWrapper = styled.div`
+export const MachineCardsContainerWrapper = styled.div`
   /* h2 {
     margin-bottom: 10px;
   } */

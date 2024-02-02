@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchSoils } from "../services/soilService";
-import { Soil } from "../types/types";
+import { Soil } from "../static/types/types";
 
 const useSoils = () => {
   const [soils, setSoils] = useState<Soil[]>([]);

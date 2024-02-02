@@ -1,13 +1,11 @@
-import { Soil } from "../../types/types";
+import { Soil } from "../../static/types/types";
 import UniversalTable from "./UniversalTable";
 
-
 interface SoilTableProps {
-    soils: Soil[];
-  }
+  soils: Soil[];
+}
 
 const SoilTable: React.FC<SoilTableProps> = ({ soils }) => {
-
   const columns = [
     { key: "name", header: "Name" },
     //   { key: "variety", header: "Variety" },

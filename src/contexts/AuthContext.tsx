@@ -41,7 +41,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const isValidToken = token && isTokenValid(token);
 
       if (!isValidToken&&!publicRoutes.includes(window.location.pathname)) {
-        // Redirect to sign-in page if not authenticated
         setIsAuthenticated(false);
         navigate("/user/signin");
       } else {
@@ -49,7 +48,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             setIsAuthenticated(true);
           }
       }
-    //   setIsAuthenticated(true);
     };
 
     checkAuth();

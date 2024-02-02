@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { fetchFarmDetails } from "../../../../services/farmService";
 import { fetchFieldsByFarmId } from "../../../../services/fieldService";
 import { fetchMachinesByFarmId } from "../../../../services/machineService";
-import { Farm, Field, Machine } from "../../../../types/types";
+import { Farm, Field, Machine } from "../../../../static/types/types";
 import L from "leaflet";
 import useToggle from "../../../../hooks/Toggle";
 

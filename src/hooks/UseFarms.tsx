@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Farm } from "../types/types";
+import { Farm } from "../static/types/types";
 import { fetchFarms } from "../services/farmService";
 
 const useFarms = () => {

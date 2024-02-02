@@ -1,4 +1,4 @@
-import { Farm } from "../../../types/types";
+import { Farm } from "../../../static/types/types";
 
 export interface FarmCardProps {
   farm: Farm;

@@ -1,9 +1,13 @@
-import { BASE_URL } from "../constants/constants";
-import { Processing } from "../types/types";
+import { BASE_URL } from "../static/constants/constants";
+import { apiEndpoints } from "../static/routes/apiEndpoints";
+import { Processing } from "../static/types/types";
+
+const getProcessingsEndpoint = apiEndpoints.processing;
+const createProcessingEndpoint = apiEndpoints.createProcessing;
 
 export const fetchProcessings = async (): Promise<Processing[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/processing`, {
+    const response = await fetch(`${BASE_URL}${getProcessingsEndpoint}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
@@ -28,7 +32,7 @@ export const createProcessing = async (
   date: Date
 ): Promise<Processing> => {
   try {
-    const response = await fetch(`${BASE_URL}/processing`, {
+    const response = await fetch(`${BASE_URL}${createProcessingEndpoint}`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -38,7 +42,7 @@ export const createProcessing = async (
         growingPeriodId,
         processingTypeId,
         machineId,
-        date
+        date,
       }),
     });
 

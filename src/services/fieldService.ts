@@ -1,9 +1,15 @@
-import { BASE_URL } from "../constants/constants";
-import { Field } from "../types/types";
+import { BASE_URL } from "../static/constants/constants";
+import { apiEndpoints } from "../static/routes/apiEndpoints";
+import { Field } from "../static/types/types";
+
+const getFieldsEndpoint = apiEndpoints.field;
+const createFieldEndpoint = apiEndpoints.createField;
+const getFieldDetailsEndpoint = apiEndpoints.fieldDetails;
+const getFieldsByFarmEndpoint = apiEndpoints.fieldsByFarm;
 
 export const fetchFields = async (): Promise<Field[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/field`, {
+    const response = await fetch(`${BASE_URL}${getFieldsEndpoint}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
@@ -21,33 +27,37 @@ export const fetchFields = async (): Promise<Field[]> => {
   }
 };
 
-
 export const fetchFieldDetails = async (fieldId: string | undefined) => {
   try {
-    const response = await fetch(`${BASE_URL}/field/${fieldId}`, {
+    if (!fieldId) {
+      throw new Error("fieldId is required");
+    }
+    const response = await fetch(`${BASE_URL}${getFieldDetailsEndpoint.replace(":fieldId", fieldId)}`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
       },
     });
 
     if (!response.ok) {
-      throw new Error('Failed to fetch field details');
+      throw new Error("Failed to fetch field details");
     }
 
     return response.json();
   } catch (error) {
-    console.error('Error during fetch field details:', error);
+    console.error("Error during fetch field details:", error);
     throw error;
   }
 };
-
 
 export const fetchFieldsByFarmId = async (
   farmId: string | undefined
 ): Promise<Field[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/field/by-farm/${farmId}`, {
+    if (!farmId) {
+      throw new Error("farmId is required");
+    }
+    const response = await fetch(`${BASE_URL}${getFieldsByFarmEndpoint.replace(":farmId", farmId)}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
@@ -67,22 +77,16 @@ export const fetchFieldsByFarmId = async (
 
 export const createField = async (
   name: string,
-  borders: {type: string, coordinates: number[][][]},
+  borders: { type: string; coordinates: number[][][] },
   farmId: string,
-  soilId: string,
+  soilId: string
 ): Promise<Field> => {
   try {
-    console.log(borders);
-    console.log(JSON.stringify({
-      name,
-      borders,
-      farmId,
-      soilId,
-    }));
-    const response = await fetch(`${BASE_URL}/field`, {
-      method: 'POST',
-      headers: {Authorization: `Bearer ${localStorage.getItem('token')}`,
-      'Content-Type': 'application/json',
+    const response = await fetch(`${BASE_URL}${createFieldEndpoint}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name,

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Soil } from "../../../types/types";
+import { Soil } from "../../../static/types/types";
 import { fetchSoils } from "../../../services/soilService";
 
 export const useSoilsPageLogic = () => {

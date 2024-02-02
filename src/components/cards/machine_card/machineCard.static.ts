@@ -1,5 +1,5 @@
-import { Machine } from "../../../types/types";
+import { Machine } from "../../../static/types/types";
 
 export interface MachineCardProps {
-    machine: Machine;
-  }
+  machine: Machine;
+}

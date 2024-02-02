@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Farm } from "../../../types/types";
+import { Farm } from "../../../static/types/types";
 import { fetchFarms } from "../../../services/farmService";
 import { useNavigate } from "react-router-dom";
 
 export const useFarmsPageLogic = () => {
   const navigate = useNavigate();
-  
+
   const [farms, setFarms] = useState<Farm[]>([]);
   const [filteredFarms, setFilteredFarms] = useState<Farm[]>([]);
   const title = "All Farms";

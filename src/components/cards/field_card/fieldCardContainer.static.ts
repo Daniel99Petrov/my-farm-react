@@ -1,5 +1,5 @@
-import { Field } from "../../../types/types";
+import { Field } from "../../../static/types/types";
 
 export interface FieldCardContainerProps {
-    fields: Field[];
-  }
+  fields: Field[];
+}

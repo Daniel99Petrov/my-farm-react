@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { fetchFieldDetails } from "../../../../services/fieldService";
-import { Farm, Field, Soil } from "../../../../types/types";
+import { Farm, Field, Soil } from "../../../../static/types/types";
 import L from "leaflet";
 import { fetchSoilDetails } from "../../../../services/soilService";
 import { fetchFarmDetails } from "../../../../services/farmService";

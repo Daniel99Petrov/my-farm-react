@@ -28,12 +28,12 @@ export interface Machine {
   deleted: Date;
 }
 
-export type BorderType = "Polygon" ;
+export type BorderType = "Polygon";
 export type FieldCoordinatesType = number[][][];
 export type FieldBordersType = {
   type: BorderType;
   coordinates: FieldCoordinatesType;
-}
+};
 
 export interface Field {
   id: string;

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { ProcessingType } from "../../../types/types";
+import { ProcessingType } from "../../../static/types/types";
 import { useNavigate } from "react-router-dom";
 import { fetchProcessingTypes } from "../../../services/processingTypeService";
 
 export const useProcessingTypesPageLogic = () => {
   const [processingTypes, setProcessingTypes] = useState<ProcessingType[]>([]);
-  const [filteredProcessingTypes, setFilteredProcessingTypes] = useState<ProcessingType[]>([]);
+  const [filteredProcessingTypes, setFilteredProcessingTypes] = useState<
+    ProcessingType[]
+  >([]);
   const title = "All Processing Types";
   const searchPlaceholder = "Search processing type..";
   const navigate = useNavigate();

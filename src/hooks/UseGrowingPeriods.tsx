@@ -1,8 +1,6 @@
-
 import { useEffect, useState } from "react";
-import { GrowingPeriod } from "../types/types";
+import { GrowingPeriod } from "../static/types/types";
 import { fetchGrowingPeriods } from "../services/growingPeriodService";
-
 
 const useGrowingPeriods = () => {
   const [growingPeriods, setGrowingPeriods] = useState<GrowingPeriod[]>([]);

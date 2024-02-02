@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Crop } from "../../../types/types";
+import { Crop } from "../../../static/types/types";
 import { useNavigate } from "react-router-dom";
 import { fetchCrops } from "../../../services/cropService";
 

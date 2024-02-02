@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Machine } from "../types/types";
+import { Machine } from "../static/types/types";
 import { fetchMachines } from "../services/machineService";
 
 const useMachines = () => {
@@ -21,7 +21,6 @@ const useMachines = () => {
     fetchData();
   }, []);
 
-  
   return { machines, loading };
 };
 

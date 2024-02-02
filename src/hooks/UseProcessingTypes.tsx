@@ -1,8 +1,6 @@
-
 import { useEffect, useState } from "react";
-import { ProcessingType } from "../types/types";
+import { ProcessingType } from "../static/types/types";
 import { fetchProcessingTypes } from "../services/processingTypeService";
-
 
 const useProcessingTypes = () => {
   const [processingTypes, setProcessingTypes] = useState<ProcessingType[]>([]);

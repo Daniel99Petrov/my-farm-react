@@ -1,5 +1,5 @@
-import { Farm } from "../../../types/types";
+import { Farm } from "../../../static/types/types";
 
 export interface FarmCardContainerProps {
-    farms: Farm[];
-  }
+  farms: Farm[];
+}

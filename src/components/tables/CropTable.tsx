@@ -1,4 +1,4 @@
-import { Crop } from "../../types/types";
+import { Crop } from "../../static/types/types";
 import UniversalTable from "./UniversalTable";
 
 interface CropTableProps {
@@ -6,7 +6,6 @@ interface CropTableProps {
 }
 
 const CropTable: React.FC<CropTableProps> = ({ crops }) => {
-
   const columns = [
     { key: "name", header: "Name" },
     //   { key: "variety", header: "Variety" },
