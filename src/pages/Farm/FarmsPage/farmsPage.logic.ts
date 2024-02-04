@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Farm } from "../../../static/types/types";
 import { useNavigate } from "react-router-dom";
-import useFarms from "../../../hooks/UseFarms2";
+import useFarms from "../../../hooks/UseFarms";
+
 
 export const useFarmsPageLogic = () => {
   const navigate = useNavigate();

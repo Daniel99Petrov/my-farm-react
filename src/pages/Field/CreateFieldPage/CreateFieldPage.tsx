@@ -4,7 +4,6 @@ import {
 } from "../../../ui_elements/CommonStyledElements";
 import fieldIcon from "../../../assets/icons/field.png";
 import { useNavigate } from "react-router-dom";
-import { FieldBordersType } from "../../../static/types/types";
 import { createField } from "../../../services/fieldService";
 import CreateFieldForm from "../../../components/forms/Field/CreateFieldForm";
 export default function CreateFieldPage() {
@@ -12,14 +11,15 @@ export default function CreateFieldPage() {
   const navigate = useNavigate();
   const handleCreateField = async (formData: {
     name: string;
-    borders: FieldBordersType;
+    coordinates: string;
     soilId: string;
     farmId: string;
   }) => {
     try {
+      const parsedCoordinates = JSON.parse(formData.coordinates);
       const createdField = await createField(
         formData.name,
-        formData.borders,
+        {type: "Polygon", coordinates: parsedCoordinates},
         formData.farmId,
         formData.soilId
       );

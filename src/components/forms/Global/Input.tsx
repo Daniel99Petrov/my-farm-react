@@ -1,13 +1,22 @@
 import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 
-const StyledInputWrapper = styled.div`
+export const StyledInputWrapper = styled.div`
   position: relative;
   width: 90%;
   margin-bottom: 16px;
+
+  label {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+    color: #9bafaf;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
 `;
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
   padding: 8px;
   width: 100%;
   border: 1px solid #ccc;

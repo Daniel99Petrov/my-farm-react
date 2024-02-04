@@ -54,7 +54,6 @@ export const createFarm = async (
   name: string,
   latitude: string,
   longitude: string
-  // soilId: string
 ): Promise<Farm> => {
   try {
     const response = await fetch(`${BASE_URL}${createFarmEndpoint}`, {
@@ -67,7 +66,6 @@ export const createFarm = async (
         name,
         latitude,
         longitude,
-        // soilId,
       }),
     });
 

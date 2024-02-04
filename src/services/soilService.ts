@@ -2,7 +2,7 @@ import { BASE_URL } from "../static/constants/constants";
 import { apiEndpoints } from "../static/routes/apiEndpoints";
 import { Soil } from "../static/types/types";
 
-const getSoilsEndpoint = apiEndpoints.soil;
+export const getSoilsEndpoint = apiEndpoints.soil;
 const createSoilEndpoint = apiEndpoints.createSoil;
 const getSoilDetailsEndpoint = apiEndpoints.soilDetails;
 
