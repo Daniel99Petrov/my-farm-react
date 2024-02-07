@@ -4,7 +4,7 @@ import {
 } from "../../../ui_elements/CommonStyledElements";
 import processingIcon from "../../../assets/icons/processing.png";
 import { createProcessing } from "../../../services/processingService";
-import CreateProcessingForm from "../../../components/forms/Processing/CreateProcessingForm";
+import CreateProcessingForm from "../../../components/forms/Processing/Create/CreateProcessingForm";
 import { useNavigate } from "react-router-dom";
 export default function CreateProcessingPage() {
   const title = "Fill in the info to create a new Processing";
@@ -16,7 +16,7 @@ export default function CreateProcessingPage() {
     date: Date;
   }) => {
     try {
-       await createProcessing(
+      await createProcessing(
         formData.growingPeriodId,
         formData.processingTypeId,
         formData.machineId,

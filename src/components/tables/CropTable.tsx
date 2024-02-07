@@ -3,11 +3,19 @@ import UniversalTable from "./UniversalTable";
 
 interface CropTableProps {
   crops: Crop[];
+  onDeleteCrop: (cropId: string) => void;
 }
 
-const CropTable: React.FC<CropTableProps> = ({ crops }) => {
+const CropTable: React.FC<CropTableProps> = ({ crops, onDeleteCrop }) => {
   const columns = [
     { key: "name", header: "Name" },
+    {
+      key: "actions",
+      header: "Actions",
+      render: (rowData: Crop) => (
+        <button onClick={() => onDeleteCrop(rowData.id)}>Delete</button>
+      ),
+    },
     //   { key: "variety", header: "Variety" },
     //   { key: "quantity", header: "Quantity" },
     // Add more columns as needed

@@ -17,7 +17,11 @@ export const fetchMachines = async (): Promise<Machine[]> => {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch machines");
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to fetch machines: `, errorMessage);
+      throw new Error(`Failed to fetch machines: ${errorData}`);
     }
 
     return response.json();
@@ -46,7 +50,11 @@ export const fetchMachineDetails = async (machineId: string | undefined) => {
     );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch machine details");
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to fetch machine: `, errorMessage);
+      throw new Error(`Failed to fetch machine: ${errorData}`);
     }
 
     return response.json();
@@ -75,7 +83,11 @@ export const fetchMachinesByFarmId = async (
       const machinesData = await response.json();
       return machinesData;
     } else {
-      throw new Error("Failed to fetch machines");
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to fetch machines: `, errorMessage);
+      throw new Error(`Failed to fetch machines: ${errorData}`);
     }
   } catch (error) {
     console.error("Error fetching machines:", error);

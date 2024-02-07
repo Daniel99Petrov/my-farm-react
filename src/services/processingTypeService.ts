@@ -15,7 +15,11 @@ export const fetchProcessingTypes = async (): Promise<ProcessingType[]> => {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch processing types");
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to fetch processing types: `, errorMessage);
+      throw new Error(`Failed to fetch processing types: ${errorData}`);
     }
 
     return response.json();
@@ -41,9 +45,11 @@ export const createProcessingType = async (
     });
 
     if (!response.ok) {
-      throw new Error(
-        `Failed to create ProcessingType: ${response.statusText}`
-      );
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to create processing type: `, errorMessage);
+      throw new Error(`Failed to create processing type: ${errorData}`);
     }
 
     return await response.json();

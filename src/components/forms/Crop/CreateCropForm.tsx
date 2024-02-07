@@ -1,47 +1,68 @@
-import { ChangeEvent, useState } from "react";
-import Input from "../Global/Input";
+import { useState } from "react";
+import Input from "../Global/Input/Input";
 import {
   FormContainer,
   FormItems,
   GreenButton,
 } from "../../../ui_elements/CommonStyledElements";
+import { isNotEmpty } from "../../../utils/validation";
+import { CreateCropFormProps } from "./CreateCropForm.static";
 
-interface CreateCropFormProps {
-  onSubmit: (formData: {
-    name: string;
-  }) => void;
-}
 const CreateCropForm: React.FC<CreateCropFormProps> = ({ onSubmit }) => {
-  const [name, setName] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+  });
+  const [didEdit, setDidEdit] = useState({
+    name: false,
+  });
+  const nameIsInvalid = didEdit.name && !isNotEmpty(formData.name);
 
-
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    switch (name) {
-      case "name":
-        setName(value);
-        break;
-      default:
-        break;
-    }
+  const handleInputChange = (identifier: string, value: string) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [identifier]: value,
+    }));
+    setDidEdit((prevEdit) => ({
+      ...prevEdit,
+      [identifier]: false,
+    }));
   };
-  const handleSubmit = (event: React.FormEvent) => {
+
+  function handleInputBlur(identifier: string) {
+    setDidEdit((prevEdit) => ({
+      ...prevEdit,
+      [identifier]: true,
+    }));
+  }
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = { name };
-    onSubmit(formData);
-  };
+
+    const submittedFormData = {
+      name: formData.name,
+    };
+    onSubmit(submittedFormData);
+    (event.target as HTMLFormElement).reset();
+  }
 
   return (
     <FormContainer>
       <FormItems onSubmit={handleSubmit}>
         <Input
+          label="name"
+          id="name"
           type="text"
           name="name"
-          value={name}
-          onChange={handleInputChange}
-          label="Name"
+          onBlur={() => handleInputBlur("name")}
+          onChange={(event: { target: { value: string } }) =>
+            handleInputChange("name", event.target.value)
+          }
+          value={formData.name}
+          error={nameIsInvalid && "Please enter a valid name!"}
+          required
         />
-        <GreenButton type="submit">Create Crop</GreenButton>
+
+        <GreenButton>Create Crop</GreenButton>
       </FormItems>
     </FormContainer>
   );

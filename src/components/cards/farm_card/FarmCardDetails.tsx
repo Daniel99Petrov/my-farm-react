@@ -1,5 +1,5 @@
-import { FarmDetailsProps } from "./farmCardDetails.static";
-import { StyledFarmDetails } from "./farmCardDetails.styles";
+import { FarmDetailsProps } from "./FarmCardDetails.static";
+import { StyledFarmDetails } from "./FarmCardDetails.styles";
 
 export default function FarmDetails({ farm }: FarmDetailsProps) {
   return (

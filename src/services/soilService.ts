@@ -2,9 +2,11 @@ import { BASE_URL } from "../static/constants/constants";
 import { apiEndpoints } from "../static/routes/apiEndpoints";
 import { Soil } from "../static/types/types";
 
-export const getSoilsEndpoint = apiEndpoints.soil;
+const getSoilsEndpoint = apiEndpoints.soil;
 const createSoilEndpoint = apiEndpoints.createSoil;
 const getSoilDetailsEndpoint = apiEndpoints.soilDetails;
+export const deleteSoilEndpoint = apiEndpoints.deleteSoil;
+
 
 export const fetchSoils = async (): Promise<Soil[]> => {
   try {
@@ -16,7 +18,11 @@ export const fetchSoils = async (): Promise<Soil[]> => {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch soils");
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to fetch soils: `, errorMessage);
+      throw new Error(`Failed to fetch soils: ${errorData}`);
     }
 
     return response.json();
@@ -39,7 +45,11 @@ export const fetchSoilDetails = async (soilId: string | undefined) => {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch soil details");
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to fetch soil: `, errorMessage);
+      throw new Error(`Failed to fetch soil: ${errorData}`);
     }
 
     return response.json();
@@ -63,7 +73,11 @@ export const createSoil = async (name: string): Promise<Soil> => {
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to create soil: ${response.statusText}`);
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to create soil: `, errorMessage);
+      throw new Error(`Failed to create soil: ${errorMessage}`);
     }
 
     return await response.json();

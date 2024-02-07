@@ -3,16 +3,21 @@ import UniversalTable from "./UniversalTable";
 
 interface ProcessingTypeTableProps {
   processingTypes: ProcessingType[];
+  onDeleteProcessingType: (cropId: string) => void;
 }
 
 const ProcessingTypeTable: React.FC<ProcessingTypeTableProps> = ({
-  processingTypes,
+  processingTypes, onDeleteProcessingType
 }) => {
   const columns = [
     { key: "name", header: "Name" },
-    //   { key: "variety", header: "Variety" },
-    //   { key: "quantity", header: "Quantity" },
-    // Add more columns as needed
+    {
+      key: "actions",
+      header: "Actions",
+      render: (rowData: ProcessingType) => (
+        <button onClick={() => onDeleteProcessingType(rowData.id)}>Delete</button>
+      ),
+    },
   ];
 
   const handleRowClick = (processingTypeId: string) => {

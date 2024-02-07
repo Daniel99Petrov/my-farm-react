@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import farmImg from "../../../assets/farm-placeholder.jpg";
 import FarmCardDetails from "./FarmCardDetails";
-import { FarmCardProps } from "./farmCard.static";
-import { FarmImage, StyledFarmCard } from "./farmCard.styles";
+import { FarmCardProps } from "./FarmCard.static";
+import { StyledFarmCard, FarmImage } from "./FarmCard.styles";
+
 
 export default function FarmCard({ farm }: FarmCardProps) {
 

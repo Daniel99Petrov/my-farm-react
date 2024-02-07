@@ -1,8 +1,7 @@
 import { Container } from "../../../ui_elements/CommonStyledElements";
 import FarmCard from "./FarmCard";
-import { FarmCardContainerProps } from "./farmCardContainer.static";
-import { FarmCardsContainerWrapper } from "./farmCardContainer.styles";
-
+import { FarmCardContainerProps } from "./FarmCardContainer.static";
+import { FarmCardsContainerWrapper } from "./FarmCardContainer.styles";
 const FarmCardsContainer = ({ farms }:FarmCardContainerProps) => {
     return (
       <Container>

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Machine } from "../../../static/types/types";
-import { fetchMachines } from "../../../services/machineService";
+import useMachines from "../../../hooks/Machine/UseMachines";
 
 export const useMachinesPageLogic = () => {
-  const [machines, setMachines] = useState<Machine[]>([]);
-  const [filteredMachines, setFilteredMachines] = useState<Machine[]>([]);
+  const { machines } = useMachines();
+  const [filteredMachines, setFilteredMachines] = useState<
+    Machine[] | undefined
+  >([]);
+  const [isLoading, setIsLoading] = useState(true);
   const title = `All Machines`;
   const searchPlaceholder = `Search machine..`;
   const navigate = useNavigate();
@@ -14,20 +17,14 @@ export const useMachinesPageLogic = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const machinesData = await fetchMachines();
-        setMachines(machinesData);
-        setFilteredMachines(machinesData);
-      } catch (error) {
-        console.error("Error during fetch:", error);
-      }
-    };
-    fetchData();
-  }, []);
+    if (machines) {
+      setFilteredMachines(machines);
+      setIsLoading(false);
+    }
+  }, [machines]);
 
   const handleSearch = (query: string) => {
-    const filtered = machines.filter(
+    const filtered = machines?.filter(
       (machine) =>
         machine.registrationNumber
           .toLowerCase()
@@ -41,6 +38,7 @@ export const useMachinesPageLogic = () => {
   return {
     machines: filteredMachines,
     handleSearch,
+    isLoading,
     handleCreateField,
     title,
     searchPlaceholder,

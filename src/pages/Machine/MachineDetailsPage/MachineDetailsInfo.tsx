@@ -1,6 +1,4 @@
 import DetailBullet from "../../../components/bullets/detail_bullet/DetailBullet";
-import { FieldDetailsInterface } from "./static/FieldDetailsPage.static";
-import locationIcon from "../../../assets/icons/location.png";
 import soilIcon from "../../../assets/icons/location.png";
 import farmIcon from "../../../assets/icons/farm.png";
 import { MachineDetailsInterface } from "./static/machineDetails.static";

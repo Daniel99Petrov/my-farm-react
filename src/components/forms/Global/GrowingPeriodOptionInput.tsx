@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchFieldDetails } from "../../../services/fieldService";
 
-const GrowingPeriodOptionInput = ({ options, label, onSelect }) => {
+const GrowingPeriodOptionInput = ({ options, label, onSelect, ...props }) => {
   const [fields, setFields] = useState([]);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const GrowingPeriodOptionInput = ({ options, label, onSelect }) => {
   return (
     <div>
       <label>{label}</label>
-      <select onChange={handleSelectChange}>
+      <select onChange={handleSelectChange} {...props}>
         <option value="" disabled selected>
           {`Choose ${label}`}
         </option>

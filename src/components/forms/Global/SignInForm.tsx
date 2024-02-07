@@ -1,37 +1,46 @@
 import { FormEvent, useState } from "react";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import Input from "./Input";
+import Input from "./Input/Input";
 import {
+  FormContainer,
   FormItems,
   GreenButton,
 } from "../../../ui_elements/CommonStyledElements";
 import { useAuth } from "../../../contexts/AuthContext";
+import { isNotEmpty } from "../../../utils/validation";
 
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 700px;
-  margin: 10% auto;
-  gap: 16px;
-  cursor: pointer;
-  padding: 12px 16px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0px 5px 30px 5px rgba(0, 0, 0, 0.1);
-
-  @media (max-width: 360px) {
-    max-width: 100%;
-    margin: 10% auto;
-    padding: 12px;
-  }
-`;
 
 export default function SignInForm() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+  const [didEdit, setDidEdit] = useState({
+    username: false,
+    password: false,
+  });
+  const usernameIsInvalid = didEdit.username && !isNotEmpty(formData.username);
+  const passwordIsInvalid = didEdit.password && !isNotEmpty(formData.password);
+
+  const handleInputChange = (identifier: string, value: string) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [identifier]: value,
+    }));
+    setDidEdit((prevEdit) => ({
+      ...prevEdit,
+      [identifier]: false,
+    }));
+  };
+
+  function handleInputBlur(identifier: string) {
+    setDidEdit((prevEdit) => ({
+      ...prevEdit,
+      [identifier]: true,
+    }));
+  }
 
   const handleSignIn = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,14 +50,17 @@ export default function SignInForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({
+          username: formData.username,
+          password: formData.password,
+        }),
       });
 
       if (response.status === 201) {
         const data = await response.json();
         // localStorage.setItem("token", data.access_token);
-        login(data.access_token)
-        navigate("/", {replace: true});
+        login(data.access_token);
+        navigate("/", { replace: true });
       } else {
         const errorData = await response.json();
         console.error("Sign-in failed. Unexpected status:", errorData);
@@ -64,18 +76,30 @@ export default function SignInForm() {
         <FormItems onSubmit={handleSignIn}>
           <h2>Sign In</h2>
           <Input
+            label="Username"
+            id="username"
             type="text"
             name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            label="Username"
+            onBlur={() => handleInputBlur("username")}
+            onChange={(event: { target: { value: string } }) =>
+              handleInputChange("username", event.target.value)
+            }
+            value={formData.username}
+            error={usernameIsInvalid && "Please enter a valid username!"}
+            required
           />
           <Input
+            label="Password"
+            id="password"
             type="password"
             name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            label="Password"
+            onBlur={() => handleInputBlur("password")}
+            onChange={(event: { target: { value: string } }) =>
+              handleInputChange("password", event.target.value)
+            }
+            value={formData.password}
+            error={passwordIsInvalid && "Please enter a valid password!"}
+            required
           />
           <GreenButton>Sign In</GreenButton>
         </FormItems>

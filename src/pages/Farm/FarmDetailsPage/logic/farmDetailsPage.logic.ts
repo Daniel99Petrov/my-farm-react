@@ -4,7 +4,10 @@ import { fetchFieldsByFarmId } from "../../../../services/fieldService";
 import { fetchMachinesByFarmId } from "../../../../services/machineService";
 import { Farm, Field, Machine } from "../../../../static/types/types";
 import L from "leaflet";
-import useToggle from "../../../../hooks/Toggle";
+import useToggle from "../../../../hooks/UseToggle";
+import useDeleteFarm from "../../../../hooks/Farm/UseDeleteFarm";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../../../static/routes/routes";
 
 export const FarmDetailsPageLogic = (farmId: string | undefined) => {
   const [farm, setFarm] = useState<Farm | null>(null);
@@ -12,7 +15,8 @@ export const FarmDetailsPageLogic = (farmId: string | undefined) => {
   const [machines, setMachines] = useState<Machine[]>([]);
   const mapRef = useRef<L.Map | null>(null);
   const [showFields, toggleShowFields] = useToggle(true);
-
+  const { deleteFarm } = useDeleteFarm();
+  const navigate = useNavigate();
   useEffect(() => {
     const loadFarmDetails = async () => {
       try {
@@ -67,6 +71,10 @@ export const FarmDetailsPageLogic = (farmId: string | undefined) => {
     machines,
     showFields,
     toggleShowFields,
-    handleUpdateFarmInfo: (id: string) => console.log(id),
+    handleUpdateFarmInfo: (id: string) => navigate(routes.updateFarm.replace(":farmId", id)),
+    handleDeleteFarm: async (id: string) => {
+      deleteFarm(id);
+      navigate("/farm");
+    },
   };
 };

@@ -1,41 +1,42 @@
 import { useEffect, useState } from "react";
-import { Crop } from "../../../static/types/types";
 import { useNavigate } from "react-router-dom";
-import { fetchCrops } from "../../../services/cropService";
+import useCrops from "../../../hooks/Crop/UseCrops";
+import { Crop } from "../../../static/types/types";
+import useDeleteCrop from "../../../hooks/Crop/UseDeleteCrop";
 
 export const useCropsPageLogic = () => {
-  const [crops, setCrops] = useState<Crop[]>([]);
-  const [filteredCrops, setFilteredCrops] = useState<Crop[]>([]);
+  const { crops } = useCrops();
+  const {deleteCrop} = useDeleteCrop();
+  const [filteredCrops, setFilteredCrops] = useState<Crop[] | undefined>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const title = "All Crops";
   const searchPlaceholder = "Search crop..";
   const navigate = useNavigate();
-  const handleCreateFarm = () => {
+  const handleCreateCrop = () => {
     navigate("/crop-create");
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const cropsData = await fetchCrops();
-        setCrops(cropsData);
-        setFilteredCrops(cropsData);
-      } catch (error) {
-        console.error("Error during fetch:", error);
-      }
-    };
-    fetchData();
-  }, []);
+    if (crops) {
+      setFilteredCrops(crops);
+      setIsLoading(false);
+    }
+  }, [crops]);
   const handleSearch = (query: string) => {
-    const filtered = crops.filter((crop) =>
+    const filtered = crops?.filter((crop) =>
       crop.name.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredCrops(filtered);
   };
-
+  const handleDeleteCrop = async (cropId: string) => {
+    await deleteCrop(cropId);
+  };
   return {
     crops: filteredCrops,
     handleSearch,
-    handleCreateFarm,
+    isLoading,
+    handleCreateCrop,
+    handleDeleteCrop,
     title,
     searchPlaceholder,
   };

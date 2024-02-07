@@ -43,7 +43,7 @@ const UniversalTable = ({ data, columns, onRowClick }) => {
         {data.map((row) => (
           <TableRow key={row.id} onClick={() => handleRowClick(row)}>
             {columns.map((column) => (
-              <TableCell key={column.key}>{row[column.key]}</TableCell>
+              <TableCell key={column.key}>{column.render ? column.render(row) : row[column.key]}</TableCell>
             ))}
           </TableRow>
         ))}

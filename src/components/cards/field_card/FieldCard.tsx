@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import fieldImg from "../../../assets/field-placeholder.jpg";
 import FieldCardDetails from "./FieldCardDetails";
-import { FieldCardProps } from "./fieldCard.static";
-import { FieldImage, StyledFieldCard } from "./fieldCard.styles";
+import { FieldCardProps } from "./FieldCard.static";
+import { FieldImage, StyledFieldCard } from "./FieldCard.styles";
 
 export default function FieldCard({ field }: FieldCardProps) {
 

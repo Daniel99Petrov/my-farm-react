@@ -1,5 +1,5 @@
-import { FieldDetailsProps } from "./fieldCardDetails.static";
-import { StyledFieldDetails } from "./fieldCardDetails.styles";
+import { FieldDetailsProps } from "./FieldCardDetails.static";
+import { StyledFieldDetails } from "./FieldCardDetails.styles";
 // import fieldIcon from "../../../assets/icons/field.png";
 // import { CardIcon } from "../../../ui_elements/CommonStyledElements";
 

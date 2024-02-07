@@ -4,14 +4,14 @@ import locationIcon from "../../../assets/icons/location.png";
 import soilIcon from "../../../assets/icons/location.png";
 import farmIcon from "../../../assets/icons/farm.png";
 
-const FieldDetailsInfo = ({ borders, soilName,farmName }: FieldDetailsInterface) => {
+const FieldDetailsInfo = ({ coordinates, soilName,farmName }: FieldDetailsInterface) => {
   return (
     <div>
       <DetailBullet icon={soilIcon} value={soilName} />
       <DetailBullet icon={farmIcon} value={farmName} />
       <DetailBullet
         icon={locationIcon}
-        value={`Borders: ${borders}`}
+        value={`Borders: ${coordinates}`}
       />
     </div>
   );

@@ -6,29 +6,45 @@ export const apiEndpoints = {
   farm: "/farm",
   farmDetails: "/farm/:farmId",
   createFarm: "/farm",
+  deleteFarm: "/farm/:farmId",
+  updateFarm: "/farm/:farmId",
   // FIELD
   field: "/field",
   fieldDetails: "/field/:fieldId",
   fieldsByFarm: "/field/by-farm/:farmId",
   createField: "/field",
+  deleteField: "/field/:fieldId",
+  updateField: "/field/:fieldId",
   // MACHINE
   machine: "/machine",
   machineDetails: "/machine/:machineId",
   machinesByFarm: "/machine/by-farm/:farmId",
   createMachine: "/machine",
+  deleteMachine: "/machine/:machineId",
+  updateMachine: "/machine/:machineId",
+
   // PROCESSING
   processing: "/processing",
   createProcessing: "/processing",
+  deleteProcessing: "/processing/:processingId",
+  processingsByGrowingPeriod: "/processing/by-growing-period/:growingPeriodId",
   // PROCESSING-TYPE
   processingType: "/processing-type",
   createProcessingType: "/processing-type",
+  deleteProcessingType: "/processing-type/:processingTypeId",
   // CROP
   crop: "/crop",
+  cropDetails: "/crop/:cropId",
   createCrop: "/crop",
+  deleteCrop: "/crop/:cropId",
   // SOIL
   soil: "/soil",
   soilDetails: "/soil/:soilId",
   createSoil: "/soil",
+  deleteSoil: "/soil/:soilId",
   // GROWING-PERIOD
   growingPeriod: "/growing-period",
+  growingPeriodDetails: "/growing-period/:growingPeriodId",
+  growingPeriodsByField: "/growing-period/by-field/:fieldId",
+  createGrowingPeriod: "/growing-period",
 };

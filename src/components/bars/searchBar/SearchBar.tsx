@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
-import { SearchBarProps } from "./searchBar.static";
-import { SearchBarWrapper } from "./searchBar.styles";
+import { SearchBarProps } from "./SearchBar.static";
+import { SearchBarWrapper } from "./SearchBar.styles";
 
 
   const SearchBar: React.FC<SearchBarProps> = ({ placeholder, onSearch }) => {

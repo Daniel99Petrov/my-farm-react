@@ -1,6 +1,9 @@
 import processingTypesIcon from "../../../assets/icons/processing.png";
 import {
+  Container,
   GreenButton,
+  LoadingContainer,
+  LoadingText,
   PageMainButtonsContainer,
   PageTitle,
   TitleImage,
@@ -10,20 +13,39 @@ import { useProcessingTypesPageLogic } from "./processingTypesPage.logic";
 import ProcessingTypeTable from "../../../components/tables/ProcessingTypeTable";
 
 export default function ProcessingTypesPage() {
-  const { processingTypes, title, handleSearch, handleCreateProcessingType, searchPlaceholder } =
-    useProcessingTypesPageLogic();
+  const {
+    processingTypes,
+    title,
+    isLoading,
+    handleSearch,
+    handleCreateProcessingType,
+    handleDeleteProcessingType,
+    searchPlaceholder,
+  } = useProcessingTypesPageLogic();
 
   return (
     <div>
-      <PageTitle>
-        <TitleImage src={processingTypesIcon} alt="Processing Types Icon" />
-        {title}
-      </PageTitle>
-      <PageMainButtonsContainer>
-        <SearchBar placeholder={searchPlaceholder} onSearch={handleSearch} />
-        <GreenButton onClick={handleCreateProcessingType}>Create Processing Type</GreenButton>
-      </PageMainButtonsContainer>
-      {processingTypes && <ProcessingTypeTable processingTypes={processingTypes} />}
+      {isLoading && <LoadingText>LOADING</LoadingText>}
+      <LoadingContainer $isLoading={isLoading}>
+        <PageTitle>
+          <TitleImage src={processingTypesIcon} alt="Processing Types Icon" />
+          {title}
+        </PageTitle>
+        <PageMainButtonsContainer>
+          <SearchBar placeholder={searchPlaceholder} onSearch={handleSearch} />
+          <GreenButton onClick={handleCreateProcessingType}>
+            Create Processing Type
+          </GreenButton>
+        </PageMainButtonsContainer>
+        <Container>
+        {processingTypes && (
+          <ProcessingTypeTable
+            processingTypes={processingTypes}
+            onDeleteProcessingType={handleDeleteProcessingType}
+          />
+        )}
+      </Container>
+      </LoadingContainer>
     </div>
   );
 }

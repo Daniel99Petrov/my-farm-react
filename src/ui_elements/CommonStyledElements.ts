@@ -1,28 +1,33 @@
 import styled, { css } from "styled-components";
 
-export const GreenButton = styled.button`
+const BaseButton = styled.button`
   padding: 10px 15px;
-  background-color: #8db76d;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+`;
+
+export const GreenButton = styled(BaseButton)`
+  background-color: #6a9447;
 
   &:hover {
-    background-color: #6a9447;
+    background-color: #8db76d;
   }
 `;
 
-export const RedButton = styled(GreenButton)`
+export const RedButton = styled(BaseButton)`
   background-color: #ff0000;
+
   &:hover {
     background-color: #cc0000;
   }
 `;
 
-export const BigBlueButton = styled(GreenButton)`
+export const BigBlueButton = styled(BaseButton)`
   background-color: #004499;
+
   &:hover {
     background-color: #0044cc;
   }
@@ -35,6 +40,7 @@ export const UpdateButtonContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 10px;
+  gap: 30px;
 `;
 
 export const FormContainer = styled.div`
@@ -50,7 +56,7 @@ export const FormContainer = styled.div`
   box-shadow: 0px 5px 30px 5px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 360px) {
-    max-width: 100%; 
+    max-width: 100%;
     margin: 10% auto;
     padding: 12px;
   }
@@ -71,19 +77,23 @@ export const Container = styled.div`
 `;
 
 export const PageMainButtonsContainer = styled(Container)`
+  background-color: aliceblue;
   margin: 50px auto 10px;
+  padding: 20px;
   display: flex;
-justify-content: center;
-/* gap: 100px; */
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  gap: 50px;
 `;
 
 export const MapDetailsContainer = styled.div`
-max-width: 1500px;
-margin: 10px auto;
+  max-width: 1500px;
+  margin: 10px auto;
   display: grid;
   grid-template-columns: 60% 40%;
   gap: 20px;
-  padding:10px;
+  padding: 10px;
   max-width: 1500px;
   background-color: aliceblue;
 `;
@@ -95,13 +105,13 @@ export const CardIcon = styled.img`
 `;
 
 export const PageTitle = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-text-align: center;
-margin: 20px;
-font-size: 26px;
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 20px;
+  font-size: 26px;
+`;
 export const TitleImage = styled.img`
   margin-right: 8px;
   width: 40px;

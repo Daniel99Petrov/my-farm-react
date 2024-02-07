@@ -2,7 +2,6 @@ import { BASE_URL } from "../static/constants/constants";
 import { apiEndpoints } from "../static/routes/apiEndpoints";
 import { Farm } from "../static/types/types";
 
-
 export const getFarmsEndpoint = apiEndpoints.farm;
 const getFarmDetailsEndpoint = apiEndpoints.farmDetails;
 const createFarmEndpoint = apiEndpoints.createFarm;
@@ -17,10 +16,14 @@ export const fetchFarms = async (): Promise<Farm[]> => {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch farms");
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to fetch farms: `, errorMessage);
+      throw new Error(`Failed to fetch farms: ${errorData}`);
     }
 
-    return response.json();
+    return await response.json();
   } catch (error) {
     console.error("Error during fetch farms:", error);
     throw error;
@@ -32,15 +35,22 @@ export const fetchFarmDetails = async (farmId: string | undefined) => {
     if (!farmId) {
       throw new Error("farmId is required");
     }
-    const response = await fetch(`${BASE_URL}${getFarmDetailsEndpoint.replace(":farmId", farmId)}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${BASE_URL}${getFarmDetailsEndpoint.replace(":farmId", farmId)}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch farm details");
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to fetch farm: `, errorMessage);
+      throw new Error(`Failed to fetch farm: ${errorData}`);
     }
 
     return response.json();
@@ -70,7 +80,11 @@ export const createFarm = async (
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to create farm: ${response.statusText}`);
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to create farm: `, errorMessage);
+      throw new Error(`Failed to create farm: ${errorData}`);
     }
 
     return await response.json();

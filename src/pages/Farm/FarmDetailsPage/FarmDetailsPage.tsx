@@ -8,6 +8,7 @@ import {
   BigBlueButton,
   MapDetailsContainer,
   PageTitle,
+  RedButton,
   TitleImage,
   UpdateButtonContainer,
 } from "../../../ui_elements/CommonStyledElements";
@@ -27,6 +28,7 @@ const FarmDetailsPage = () => {
     fields,
     machines,
     handleUpdateFarmInfo,
+    handleDeleteFarm,
     showFields,
     toggleShowFields,
   } = FarmDetailsPageLogic(farmId);
@@ -52,6 +54,9 @@ const FarmDetailsPage = () => {
                 <BigBlueButton onClick={() => handleUpdateFarmInfo(farm.id)}>
                   Update Farm Info
                 </BigBlueButton>
+                <RedButton onClick={() => handleDeleteFarm(farm.id)}>
+                  Delete Farm
+                </RedButton>
               </UpdateButtonContainer>
             </DetailsInfoContainer>
           </MapDetailsContainer>

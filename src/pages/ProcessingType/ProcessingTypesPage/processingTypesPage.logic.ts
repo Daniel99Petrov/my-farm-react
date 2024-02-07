@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { ProcessingType } from "../../../static/types/types";
 import { useNavigate } from "react-router-dom";
-import { fetchProcessingTypes } from "../../../services/processingTypeService";
+import useProcessingTypes from "../../../hooks/ProcessingType/UseProcessingTypes";
+import useDeleteProcessingType from "../../../hooks/ProcessingType/UseDeleteProcessingType";
 
 export const useProcessingTypesPageLogic = () => {
-  const [processingTypes, setProcessingTypes] = useState<ProcessingType[]>([]);
+  const { processingTypes } = useProcessingTypes();
+  const {deleteProcessingType} = useDeleteProcessingType();
   const [filteredProcessingTypes, setFilteredProcessingTypes] = useState<
-    ProcessingType[]
+    ProcessingType[] | undefined
   >([]);
+  const [isLoading, setIsLoading] = useState(true);
   const title = "All Processing Types";
   const searchPlaceholder = "Search processing type..";
   const navigate = useNavigate();
@@ -16,28 +19,27 @@ export const useProcessingTypesPageLogic = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const processingTypesData = await fetchProcessingTypes();
-        setProcessingTypes(processingTypesData);
-        setFilteredProcessingTypes(processingTypesData);
-      } catch (error) {
-        console.error("Error during fetch:", error);
-      }
-    };
-    fetchData();
-  }, []);
+    if (processingTypes) {
+      setFilteredProcessingTypes(processingTypes);
+      setIsLoading(false);
+    }
+  }, [processingTypes]);
   const handleSearch = (query: string) => {
-    const filtered = processingTypes.filter((processingType) =>
+    const filtered = processingTypes?.filter((processingType) =>
       processingType.name.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredProcessingTypes(filtered);
+  };
+  const handleDeleteProcessingType= async (processingTypeId: string) => {
+    await deleteProcessingType(processingTypeId);
   };
 
   return {
     processingTypes: filteredProcessingTypes,
     handleSearch,
+    isLoading,
     handleCreateProcessingType,
+    handleDeleteProcessingType,
     title,
     searchPlaceholder,
   };

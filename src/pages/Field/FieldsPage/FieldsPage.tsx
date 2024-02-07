@@ -1,6 +1,8 @@
 import fieldIcon from "../../../assets/icons/field.png";
 import {
   GreenButton,
+  LoadingContainer,
+  LoadingText,
   PageMainButtonsContainer,
   PageTitle,
   TitleImage,
@@ -10,11 +12,13 @@ import { useFieldsPageLogic } from "./fieldsPage.logic";
 import FieldCardsContainer from "../../../components/cards/field_card/FieldCardsContainer";
 
 export default function FieldsPage() {
-  const { fields, title, handleSearch, handleCreateField, searchPlaceholder } =
+  const { fields, title,isLoading, handleSearch, handleCreateField, searchPlaceholder } =
     useFieldsPageLogic();
 
   return (
     <div>
+      {isLoading && <LoadingText>LOADING</LoadingText>}
+      <LoadingContainer $isLoading={isLoading}>
       <PageTitle>
         <TitleImage src={fieldIcon} alt="Field Icon" />
         {title}
@@ -24,6 +28,7 @@ export default function FieldsPage() {
         <GreenButton onClick={handleCreateField}>Create Field</GreenButton>
       </PageMainButtonsContainer>
       {fields && <FieldCardsContainer fields={fields} />}
+      </LoadingContainer>
     </div>
   );
 }

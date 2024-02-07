@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const SearchBarWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 
   input {
     width: 400px;

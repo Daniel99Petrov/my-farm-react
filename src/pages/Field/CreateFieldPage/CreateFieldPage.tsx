@@ -5,7 +5,7 @@ import {
 import fieldIcon from "../../../assets/icons/field.png";
 import { useNavigate } from "react-router-dom";
 import { createField } from "../../../services/fieldService";
-import CreateFieldForm from "../../../components/forms/Field/CreateFieldForm";
+import CreateFieldForm from "../../../components/forms/Field/Create/CreateFieldForm";
 export default function CreateFieldPage() {
   const title = "Fill in the info to create a new field";
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export default function CreateFieldPage() {
       const parsedCoordinates = JSON.parse(formData.coordinates);
       const createdField = await createField(
         formData.name,
-        {type: "Polygon", coordinates: parsedCoordinates},
+        { type: "Polygon", coordinates: parsedCoordinates },
         formData.farmId,
         formData.soilId
       );

@@ -1,4 +1,4 @@
-import { StyledDetailBullet } from "./detailBullet.styles";
+import { StyledDetailBullet } from "./DetailBullet.styles";
 
 const DetailBullet = ({ icon, value }) => {
   return (

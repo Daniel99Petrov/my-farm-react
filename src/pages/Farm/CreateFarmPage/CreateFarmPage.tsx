@@ -4,18 +4,21 @@ import {
 } from "../../../ui_elements/CommonStyledElements";
 import farmIcon from "../../../assets/icons/farm.png";
 import { useNavigate } from "react-router-dom";
-import CreateFarmForm from "../../../components/forms/Farm/CreateFarmForm";
+import CreateFarmForm from "../../../components/forms/Farm/Create/CreateFarmForm";
 import { createFarm } from "../../../services/farmService";
 export default function CreateFarmPage() {
   const title = "Fill in the info to create a new farm";
   const navigate = useNavigate();
-  const handleCreateFarm = async (formData: { name: string; latitude: string; longitude: string;  }) => {
+  const handleCreateFarm = async (formData: {
+    name: string;
+    latitude: string;
+    longitude: string;
+  }) => {
     try {
       const createdFarm = await createFarm(
         formData.name,
         formData.latitude,
-        formData.longitude,
-        // formData.soilId
+        formData.longitude
       );
       const farmId = createdFarm.id;
       navigate(`/farm/${farmId}`);

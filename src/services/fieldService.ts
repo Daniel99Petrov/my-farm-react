@@ -17,7 +17,11 @@ export const fetchFields = async (): Promise<Field[]> => {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch fields");
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to fetch fields: `, errorMessage);
+      throw new Error(`Failed to fetch fields: ${errorData}`);
     }
 
     return response.json();
@@ -32,15 +36,22 @@ export const fetchFieldDetails = async (fieldId: string | undefined) => {
     if (!fieldId) {
       throw new Error("fieldId is required");
     }
-    const response = await fetch(`${BASE_URL}${getFieldDetailsEndpoint.replace(":fieldId", fieldId)}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${BASE_URL}${getFieldDetailsEndpoint.replace(":fieldId", fieldId)}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch field details");
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to fetch field details: `, errorMessage);
+      throw new Error(`Failed to fetch field details: ${errorData}`);
     }
 
     return response.json();
@@ -57,17 +68,24 @@ export const fetchFieldsByFarmId = async (
     if (!farmId) {
       throw new Error("farmId is required");
     }
-    const response = await fetch(`${BASE_URL}${getFieldsByFarmEndpoint.replace(":farmId", farmId)}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${BASE_URL}${getFieldsByFarmEndpoint.replace(":farmId", farmId)}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (response.ok) {
       const fieldsData = await response.json();
       return fieldsData;
     } else {
-      throw new Error("Failed to fetch fields");
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to fetch fields: `, errorMessage);
+      throw new Error(`Failed to fetch fields: ${errorData}`);
     }
   } catch (error) {
     console.error("Error fetching fields:", error);
@@ -97,7 +115,11 @@ export const createField = async (
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to create field: ${response}`);
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to create field: `, errorMessage);
+      throw new Error(`Failed to create field: ${errorData}`);
     }
 
     return await response.json();

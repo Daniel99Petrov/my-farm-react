@@ -1,6 +1,9 @@
 import { Container } from "../../../ui_elements/CommonStyledElements";
 import MachineCard from "./MachineCard";
-import { MachineCardContainerProps, MachineCardsContainerWrapper } from "./machineCard.style";
+import {
+  MachineCardContainerProps,
+  MachineCardsContainerWrapper,
+} from "./MachineCard.style";
 
 const MachineCardsContainer = ({ machines }: MachineCardContainerProps) => {
   return (
