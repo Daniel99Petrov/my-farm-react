@@ -9,6 +9,7 @@ import { Table, TableCell, TableHeader, TableRow } from "./GrowingPeriodDetailsP
 import { fetchGrowingPeriodDetails } from "../../../services/growingPeriodService";
 import { Container, GreenButton, PageMainButtonsContainer, PageTitle, TitleImage } from "../../../ui_elements/CommonStyledElements";
 import processingIcon from "../../../assets/icons/processing.png";
+import { routes } from "../../../static/routes/routes";
 
 const GrowingPeriodDetailsPage = () => {
     const itemsPerPage = 10;
@@ -21,9 +22,9 @@ const GrowingPeriodDetailsPage = () => {
     const {machines} = useMachines();
     const {processingTypes} = useProcessingTypes();
     const {crops} = useCrops();
-    const handleCreateProcessing = () => {
-        navigate("/processing-create");
-      };
+    const handleCreateProcessing = (id: string) => {
+      navigate(routes.createProcessing.replace(":growingPeriodId", id));
+    };
 
       
       useEffect(() => {
@@ -65,7 +66,6 @@ const GrowingPeriodDetailsPage = () => {
         <TableHeader>Machine Registration Number</TableHeader>
         <TableHeader>Crop</TableHeader>
         <TableHeader>Processing Type</TableHeader>
-        {/* <TableHeader>Field</TableHeader> */}
       </TableRow>
     </thead>
   );
@@ -95,12 +95,14 @@ const GrowingPeriodDetailsPage = () => {
   );
   return (
     <div>
+    {growingPeriodId && ( 
+      <div>
       <PageTitle>
         <TitleImage src={processingIcon} alt="Processing Icon" />
         {title}
       </PageTitle>
       <PageMainButtonsContainer>
-        <GreenButton onClick={handleCreateProcessing}>
+        <GreenButton onClick={() => handleCreateProcessing(growingPeriodId)}>
           Create Processing
         </GreenButton>
       </PageMainButtonsContainer>
@@ -126,7 +128,9 @@ const GrowingPeriodDetailsPage = () => {
         </button>
       </div>
       </Container>
-    </div>
+      </div>
+      )}
+      </div>
   );
 };
 export default GrowingPeriodDetailsPage;

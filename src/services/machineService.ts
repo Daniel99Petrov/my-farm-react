@@ -6,6 +6,8 @@ const getMachinesEndpoint = apiEndpoints.machine;
 const getMachineDetailsEndpoint = apiEndpoints.machineDetails;
 const createMachineEndpoint = apiEndpoints.createMachine;
 const getMachinesByFarmEndpoint = apiEndpoints.machinesByFarm;
+const getMachinesByFieldEndpoint = apiEndpoints.machinesByField;
+const getMachinesByGrowingPeriodEndpoint = apiEndpoints.machinesByGrowingPeriod;
 
 export const fetchMachines = async (): Promise<Machine[]> => {
   try {
@@ -72,6 +74,69 @@ export const fetchMachinesByFarmId = async (
     }
     const response = await fetch(
       `${BASE_URL}${getMachinesByFarmEndpoint.replace(":farmId", farmId)}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.ok) {
+      const machinesData = await response.json();
+      return machinesData;
+    } else {
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to fetch machines: `, errorMessage);
+      throw new Error(`Failed to fetch machines: ${errorData}`);
+    }
+  } catch (error) {
+    console.error("Error fetching machines:", error);
+    throw error;
+  }
+};
+export const fetchMachinesByFieldId = async (
+  fieldId: string | undefined
+): Promise<Machine[]> => {
+  try {
+    if (!fieldId) {
+      throw new Error("fieldId is required");
+    }
+    const response = await fetch(
+      `${BASE_URL}${getMachinesByFieldEndpoint.replace(":fieldId", fieldId)}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.ok) {
+      const machinesData = await response.json();
+      return machinesData;
+    } else {
+      const errorData = await response.json();
+      const errorMessage =
+        errorData?.error?.message || "Unknown error occurred";
+      console.error(`Failed to fetch machines: `, errorMessage);
+      throw new Error(`Failed to fetch machines: ${errorData}`);
+    }
+  } catch (error) {
+    console.error("Error fetching machines:", error);
+    throw error;
+  }
+};
+
+export const fetchMachinesByGrowingPeriodId = async (
+  growingPeriodId: string | undefined
+): Promise<Machine[]> => {
+  try {
+    if (!growingPeriodId) {
+      throw new Error("growingPeriodId is required");
+    }
+    const response = await fetch(
+      `${BASE_URL}${getMachinesByGrowingPeriodEndpoint.replace(":growingPeriodId", growingPeriodId)}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

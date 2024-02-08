@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import LogoutModal from "./modals/ConfirmModal";
-import { Container } from "../ui_elements/CommonStyledElements";
-import { useAuth } from "../contexts/AuthContext";
+import LogoutModal from "../../modals/ConfirmModal";
+import { Container } from "../../../../ui_elements/CommonStyledElements";
+import { useAuth } from "../../../../contexts/AuthContext";
 
 const StyledNav = styled.nav`
   ul {
@@ -74,38 +74,35 @@ export default function Navbar() {
     <StyledNav>
       <Container>
         <ul>
-        {isAuthenticated && (
-          <>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/farm">Farms</Link>
-          </li>
-          <li>
-            <Link to="/field">Fields</Link>
-          </li>
-          <li>
-            <Link to="/machine">Machines</Link>
-          </li>
-          <li>
-            <Link to="/processing">Processings</Link>
-          </li>
-          <li>
-            <Link to="/crop">Crops</Link>
-          </li>
-          <li>
-            <Link to="/processing-type">Processing Types</Link>
-          </li>
-          <li>
-            <Link to="/soil">Soils</Link>
-          </li>
-          </>
+          {isAuthenticated && (
+            <>
+              <li>
+                <Link to="/farm">Farms</Link>
+              </li>
+              <li>
+                <Link to="/field">Fields</Link>
+              </li>
+              <li>
+                <Link to="/machine">Machines</Link>
+              </li>
+              <li>
+                <Link to="/processing">Processings</Link>
+              </li>
+              <li>
+                <Link to="/crop">Crops</Link>
+              </li>
+              <li>
+                <Link to="/processing-type">Processing Types</Link>
+              </li>
+              <li>
+                <Link to="/soil">Soils</Link>
+              </li>
+            </>
           )}
 
           <AuthLinks>
             {!isAuthenticated && <Link to="/user/signin">Sign In</Link>}
-            {!isAuthenticated && <Link to="/user/signup">Register</Link>}
+            {!isAuthenticated && <Link to="/user/signup">Sign Up</Link>}
             {isAuthenticated && (
               <Link to="#" onClick={handleLogout}>
                 Logout

@@ -1,7 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import styled, { createGlobalStyle } from "styled-components";
-import Header from "./components/Header";
-import SignInForm from "./components/forms/Global/SignInForm";
+import Header from "./components/Global/header/Header";
 import HomePage from "./pages/Home/HomePage";
 import FarmsPage from "./pages/Farm/FarmsPage/FarmsPage";
 import FieldsPage from "./pages/Field/FieldsPage/FieldsPage";
@@ -28,32 +26,9 @@ import UpdateFarmPage from "./pages/Farm/UpdateFarmPage/UpdateFarmPage";
 import UpdateFieldPage from "./pages/Field/Update/UpdateFieldPage";
 import GrowingPeriodDetailsPage from "./pages/GrowingPeriod/GrowingPeriodDetailsPage/GrowingPeriodDetailsPage";
 import CreateGrowingPeriodPage from "./pages/GrowingPeriod/CreateGrowingPeriodPage/CreateGrowingPeriodPage";
-
-const MainHolder = styled.section`
-  width: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-`;
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
-
-  div, input, section {
-    box-sizing: border-box;
-  }
-`;
+import { GlobalStyle, MainHolder } from "./ui_elements/CommonStyledElements";
+import SignUpPage from "./pages/Auth/SignUpPage/SingUpPage";
+import SignInPage from "./pages/Auth/SingInPage/SingInPage";
 
 function App() {
   return (
@@ -64,7 +39,7 @@ function App() {
           <Header />
           <Routes>
             {/* <Route element={<PrivateRoutes />}> */}
-            <Route path={routes.welcome} element={<HomePage />} />
+            {/* <Route path={routes.welcome} element={<HomePage />} /> */}
             <Route path={routes.farm} element={<FarmsPage />} />
             <Route path={routes.farmDetails} element={<FarmDetailsPage />} />
             <Route path={routes.createFarm} element={<CreateFarmPage />} />
@@ -113,7 +88,8 @@ function App() {
             <Route path={routes.createSoil} element={<CreateSoilPage />} />
             <Route path={routes.notFound} element={<Error />} />
             {/* </Route> */}
-            <Route path={routes.signIn} element={<SignInForm />} />
+            <Route path={routes.signIn} element={<SignInPage />} />
+            <Route path={routes.signUp} element={<SignUpPage />} />
           </Routes>
         </MainHolder>
       </AuthProvider>

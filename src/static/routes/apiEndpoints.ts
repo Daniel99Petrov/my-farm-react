@@ -2,6 +2,7 @@ export const apiEndpoints = {
   welcome: "/",
   home: "/",
   signIn: "/user/signin",
+  signUp: "/user/signup",
   // FARM
   farm: "/farm",
   farmDetails: "/farm/:farmId",
@@ -19,6 +20,8 @@ export const apiEndpoints = {
   machine: "/machine",
   machineDetails: "/machine/:machineId",
   machinesByFarm: "/machine/by-farm/:farmId",
+  machinesByField: "/machine/by-field/:fieldId",
+  machinesByGrowingPeriod: "/machine/by-growing-period/:growingPeriodId",
   createMachine: "/machine",
   deleteMachine: "/machine/:machineId",
   updateMachine: "/machine/:machineId",

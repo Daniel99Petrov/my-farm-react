@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import { GreenButton, RedButton } from "../../ui_elements/CommonStyledElements";
+import {
+  GreenButton,
+  RedButton,
+} from "../../../ui_elements/CommonStyledElements";
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -48,8 +51,8 @@ export default function ConfirmModal({
       <ModalContent>
         <p>{children}</p>
         <ButtonContainer>
-        <RedButton onClick={onConfirm}>Yes</RedButton>
-        <GreenButton onClick={onClose}>No</GreenButton>
+          <RedButton onClick={onConfirm}>Yes</RedButton>
+          <GreenButton onClick={onClose}>No</GreenButton>
         </ButtonContainer>
       </ModalContent>
     </ModalOverlay>

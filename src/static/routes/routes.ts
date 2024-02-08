@@ -17,7 +17,7 @@ export const routes = {
   growingPeriodDetails: "/growing-period/:growingPeriodId",
   createGrowingPeriod: "/growing-period-create/:fieldId",
   processing: "/processing",
-  createProcessing: "/processing-create",
+  createProcessing: "/processing-create/:growingPeriodId",
   processingType: "/processing-type",
   createProcessingType: "/processing-type-create",
   crop: "/crop",
@@ -25,5 +25,6 @@ export const routes = {
   soil: "/soil",
   createSoil: "/soil-create",
   signIn: "/user/signin",
+  signUp: "/user/signup",
   notFound: "/*",
 };

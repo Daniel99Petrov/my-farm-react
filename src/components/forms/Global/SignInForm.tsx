@@ -59,8 +59,8 @@ export default function SignInForm() {
       if (response.status === 201) {
         const data = await response.json();
         // localStorage.setItem("token", data.access_token);
-        login(data.access_token);
-        navigate("/", { replace: true });
+        login(data.access_token, data.user);
+        navigate("/farm", { replace: true });
       } else {
         const errorData = await response.json();
         console.error("Sign-in failed. Unexpected status:", errorData);
@@ -71,7 +71,6 @@ export default function SignInForm() {
   };
 
   return (
-    <div>
       <FormContainer>
         <FormItems onSubmit={handleSignIn}>
           <h2>Sign In</h2>
@@ -85,7 +84,7 @@ export default function SignInForm() {
               handleInputChange("username", event.target.value)
             }
             value={formData.username}
-            error={usernameIsInvalid && "Please enter a valid username!"}
+            error={usernameIsInvalid && "Please enter a username!"}
             required
           />
           <Input
@@ -98,12 +97,11 @@ export default function SignInForm() {
               handleInputChange("password", event.target.value)
             }
             value={formData.password}
-            error={passwordIsInvalid && "Please enter a valid password!"}
+            error={passwordIsInvalid && "Please enter a password!"}
             required
           />
           <GreenButton>Sign In</GreenButton>
         </FormItems>
       </FormContainer>
-    </div>
   );
 }

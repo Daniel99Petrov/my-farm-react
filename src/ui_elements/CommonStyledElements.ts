@@ -1,5 +1,30 @@
-import styled, { css } from "styled-components";
+import styled, { createGlobalStyle, css } from "styled-components";
 
+export const MainHolder = styled.section`
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+`;
+
+export const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+
+  div, input, section {
+    box-sizing: border-box;
+  }
+`;
 const BaseButton = styled.button`
   padding: 10px 15px;
   color: #fff;
@@ -47,6 +72,8 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 700px;
+  width: 100%;
+  /* min-width: 300px; */
   margin: 10% auto;
   gap: 16px;
   cursor: pointer;

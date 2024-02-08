@@ -7,10 +7,12 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import { User } from "../static/types/types";
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: (token: string) => void;
+  user: User | null;
+  login: (token: string, user: User) => void;
   logout: () => void;
 }
 
@@ -32,20 +34,24 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
   const publicRoutes = ['/user/signin', '/user/signup'];
 
   useEffect(() => {
     const checkAuth = async () => {
       const token = localStorage.getItem("token");
+      const currentUser = user;
       const isValidToken = token && isTokenValid(token);
 
       if (!isValidToken&&!publicRoutes.includes(window.location.pathname)) {
         setIsAuthenticated(false);
+        setUser(null);
         navigate("/user/signin");
       } else {
         if (!publicRoutes.includes(window.location.pathname)) {
             setIsAuthenticated(true);
+            setUser(currentUser);
           }
       }
     };
@@ -53,13 +59,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     checkAuth();
   }, [navigate]);
 
-  const login = (token: string) => {
+
+  const login = (token: string, user: User) => {
     localStorage.setItem("token", token);
+    setUser(user)
+    console.log(user);
+    
     setIsAuthenticated(true);
   };
 
   const logout = () => {
     localStorage.removeItem("token");
+    setUser(null);
     setIsAuthenticated(false);
   };
 
@@ -72,13 +83,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const isTokenExpired = (exp) => {
+  const isTokenExpired = (exp: number | undefined) => {
     const currentTime = Date.now() / 1000;
+    if(exp){
     return exp < currentTime;
+    }
   };
 
   const contextValue: AuthContextType = {
     isAuthenticated,
+    user,
     login,
     logout,
   };

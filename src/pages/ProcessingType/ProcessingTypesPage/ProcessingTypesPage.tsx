@@ -8,7 +8,7 @@ import {
   PageTitle,
   TitleImage,
 } from "../../../ui_elements/CommonStyledElements";
-import SearchBar from "../../../components/bars/searchBar/SearchBar";
+import SearchBar from "../../../components/Global/bars/searchBar/SearchBar";
 import { useProcessingTypesPageLogic } from "./processingTypesPage.logic";
 import ProcessingTypeTable from "../../../components/tables/ProcessingTypeTable";
 
@@ -38,13 +38,13 @@ export default function ProcessingTypesPage() {
           </GreenButton>
         </PageMainButtonsContainer>
         <Container>
-        {processingTypes && (
-          <ProcessingTypeTable
-            processingTypes={processingTypes}
-            onDeleteProcessingType={handleDeleteProcessingType}
-          />
-        )}
-      </Container>
+          {processingTypes && (
+            <ProcessingTypeTable
+              processingTypes={processingTypes}
+              onDeleteProcessingType={handleDeleteProcessingType}
+            />
+          )}
+        </Container>
       </LoadingContainer>
     </div>
   );

@@ -16,7 +16,6 @@ import { fetchFields } from "../../../services/fieldService";
 import {
   BigBlueButton,
   Container,
-  GreenButton,
   PageMainButtonsContainer,
   PageTitle,
   TitleImage,

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
@@ -7,29 +7,41 @@ import {
   GreenButton,
 } from "../../../../ui_elements/CommonStyledElements";
 import OptionInput from "../../Global/OptionInput/OptionInput";
-import useGrowingPeriods from "../../../../hooks/GrowingPeriod/UseGrowingPeriods";
-import useMachines from "../../../../hooks/Machine/UseMachines";
 import useProcessingTypes from "../../../../hooks/ProcessingType/UseProcessingTypes";
-import GrowingPeriodOptionInput from "../../Global/GrowingPeriodOptionInput";
 import { registerLocale } from "react-datepicker";
 import en from "date-fns/locale/en-US";
 import { CreateProcessingFormProps } from "./CreateProcessingForm.static";
+import { fetchMachinesByGrowingPeriodId } from "../../../../services/machineService";
+import { useParams } from "react-router-dom";
+import { Machine } from "../../../../static/types/types";
 
 registerLocale("en", en);
 
 const CreateProcessingForm: React.FC<CreateProcessingFormProps> = ({
   onSubmit,
 }) => {
+  const {growingPeriodId} = useParams();
+  const [machines, setMachines] = useState<Machine[]>();
   const [formData, setFormData] = useState({
-    growingPeriodId: "",
     processingTypeId: "",
     machineId: "",
     date: new Date(),
   });
 
-  const { growingPeriods } = useGrowingPeriods();
   const { processingTypes } = useProcessingTypes();
-  const { machines } = useMachines();
+
+  useEffect(() => {
+    const loadMachines = async () => {
+      try {
+        const machinesData = await fetchMachinesByGrowingPeriodId(growingPeriodId);
+        setMachines(machinesData);
+      } catch (error) {
+        console.error("Error loading machines:", error);
+      }
+    }; 
+
+    loadMachines()
+  }, [growingPeriodId]);
 
   const handleSelectChange = (identifier: string, value: string) => {
     setFormData((prevFormData) => ({
@@ -54,16 +66,8 @@ const CreateProcessingForm: React.FC<CreateProcessingFormProps> = ({
 
   return (
     <FormContainer>
-      {growingPeriods && processingTypes && machines && (
+      {processingTypes && machines && (
         <FormItems onSubmit={handleSubmit}>
-          <GrowingPeriodOptionInput
-            options={growingPeriods}
-            label="Field"
-            onSelect={(value: string) =>
-              handleSelectChange("growingPeriodId", value)
-            }
-            required
-          />
           <OptionInput
             options={processingTypes}
             label="Processing Type"

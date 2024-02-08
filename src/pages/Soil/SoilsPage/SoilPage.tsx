@@ -8,10 +8,9 @@ import {
   PageTitle,
   TitleImage,
 } from "../../../ui_elements/CommonStyledElements";
-import SearchBar from "../../../components/bars/searchBar/SearchBar";
+import SearchBar from "../../../components/Global/bars/searchBar/SearchBar";
 import SoilTable from "../../../components/tables/SoilTable";
 import { useSoilsPageLogic } from "./soilPage.logic";
-
 
 export default function SoilsPage() {
   const {
@@ -37,7 +36,7 @@ export default function SoilsPage() {
           <GreenButton onClick={handleCreateSoil}>Create Soil</GreenButton>
         </PageMainButtonsContainer>
         <Container>
-        {soils && <SoilTable soils={soils} onDeleteSoil={handleDeleteSoil} />}
+          {soils && <SoilTable soils={soils} onDeleteSoil={handleDeleteSoil} />}
         </Container>
       </LoadingContainer>
     </div>

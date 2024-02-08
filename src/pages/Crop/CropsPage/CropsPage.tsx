@@ -9,28 +9,35 @@ import {
   PageTitle,
   TitleImage,
 } from "../../../ui_elements/CommonStyledElements";
-import SearchBar from "../../../components/bars/searchBar/SearchBar";
+import SearchBar from "../../../components/Global/bars/searchBar/SearchBar";
 import CropTable from "../../../components/tables/CropTable";
 
 export default function CropsPage() {
-  const { crops, title,isLoading, handleSearch, handleCreateCrop,handleDeleteCrop, searchPlaceholder } =
-    useCropsPageLogic();
+  const {
+    crops,
+    title,
+    isLoading,
+    handleSearch,
+    handleCreateCrop,
+    handleDeleteCrop,
+    searchPlaceholder,
+  } = useCropsPageLogic();
 
   return (
     <div>
-            {isLoading && <LoadingText>LOADING</LoadingText>}
+      {isLoading && <LoadingText>LOADING</LoadingText>}
       <LoadingContainer $isLoading={isLoading}>
-      <PageTitle>
-        <TitleImage src={cropIcon} alt="Crop Icon" />
-        {title}
-      </PageTitle>
-      <PageMainButtonsContainer>
-        <SearchBar placeholder={searchPlaceholder} onSearch={handleSearch} />
-        <GreenButton onClick={handleCreateCrop}>Create Crop</GreenButton>
-      </PageMainButtonsContainer>
-      <Container>
-      {crops && <CropTable crops={crops} onDeleteCrop={handleDeleteCrop} />}
-      </Container>
+        <PageTitle>
+          <TitleImage src={cropIcon} alt="Crop Icon" />
+          {title}
+        </PageTitle>
+        <PageMainButtonsContainer>
+          <SearchBar placeholder={searchPlaceholder} onSearch={handleSearch} />
+          <GreenButton onClick={handleCreateCrop}>Create Crop</GreenButton>
+        </PageMainButtonsContainer>
+        <Container>
+          {crops && <CropTable crops={crops} onDeleteCrop={handleDeleteCrop} />}
+        </Container>
       </LoadingContainer>
     </div>
   );

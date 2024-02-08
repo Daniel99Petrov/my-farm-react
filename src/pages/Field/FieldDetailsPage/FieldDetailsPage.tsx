@@ -20,7 +20,7 @@ import { ProcessingButtonsContainer } from "./styles/FieldDetailsPage.styles";
 
 const FieldDetailsPage = () => {
   const { fieldId } = useParams();
-  const { field, farm, soil,growingPeriods,handleCreateGrowingPeriod, handleUpdateFieldInfo, handleDeleteField } =
+  const { field, farm, soil,growingPeriods,handleCreateGrowingPeriod,handleCreateProcessing, handleUpdateFieldInfo, handleDeleteField } =
     FieldDetailsPageLogic(fieldId);
 
   return (
@@ -54,7 +54,7 @@ const FieldDetailsPage = () => {
             <GreenButton onClick={() => handleCreateGrowingPeriod(field.id)}>
             Create Growing Period
             </GreenButton>
-            <GreenButton onClick={() => handleCreateGrowingPeriod(field.id)}>
+            <GreenButton onClick={() => handleCreateProcessing(field.id, growingPeriods[0]?.id)}>
             Add New Processing
             </GreenButton>
           </ProcessingButtonsContainer>

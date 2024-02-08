@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { fetchFieldDetails } from "../../../../services/fieldService";
-import { Farm, Field, GrowingPeriod, Soil } from "../../../../static/types/types";
+import {
+  Farm,
+  Field,
+  GrowingPeriod,
+  Soil,
+} from "../../../../static/types/types";
 import L from "leaflet";
 import { fetchSoilDetails } from "../../../../services/soilService";
 import { fetchFarmDetails } from "../../../../services/farmService";
@@ -14,7 +19,7 @@ export const FieldDetailsPageLogic = (fieldId: string | undefined) => {
   const [soil, setSoil] = useState<Soil | null>(null);
   const [farm, setFarm] = useState<Farm | null>(null);
   const [growingPeriods, setGrowingPeriods] = useState<GrowingPeriod[]>([]);
-  const {deleteField} = useDeleteField();
+  const { deleteField } = useDeleteField();
   const navigate = useNavigate();
   const mapRef = useRef<L.Map | null>(null);
 
@@ -34,7 +39,7 @@ export const FieldDetailsPageLogic = (fieldId: string | undefined) => {
       } catch (error) {
         console.error("Error loading growing periods:", error);
       }
-    };   
+    };
 
     loadField();
     loadGrowingPeriods();
@@ -102,8 +107,18 @@ export const FieldDetailsPageLogic = (fieldId: string | undefined) => {
     }
   }, [field]);
 
-  const handleCreateGrowingPeriod = (id:string) => {
+  const handleCreateGrowingPeriod = (id: string) => {
     navigate(routes.createGrowingPeriod.replace(":fieldId", id));
+  };
+  const handleCreateProcessing = (fieldId: string, growingPeriodId: string) => {
+    if (growingPeriodId) {
+      navigate(
+        routes.createProcessing.replace(":growingPeriodId", growingPeriodId)
+      );
+    } else {
+      navigate(
+       routes.createGrowingPeriod.replace(":fieldId", fieldId)
+    )}
   };
 
   return {
@@ -111,11 +126,13 @@ export const FieldDetailsPageLogic = (fieldId: string | undefined) => {
     farm,
     soil,
     growingPeriods,
-    handleCreateGrowingPeriod ,
-    handleUpdateFieldInfo: (id: string) => navigate(routes.updateField.replace(":fieldId", id)),
+    handleCreateGrowingPeriod,
+    handleCreateProcessing,
+    handleUpdateFieldInfo: (id: string) =>
+      navigate(routes.updateField.replace(":fieldId", id)),
     handleDeleteField: (id: string) => {
       deleteField(id);
       navigate("/field");
-    }
+    },
   };
 };

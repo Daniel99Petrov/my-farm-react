@@ -7,11 +7,12 @@ import {
 } from "../../../ui_elements/CommonStyledElements";
 import { useFarmsPageLogic } from "./farmsPage.logic";
 import farmIcon from "../../../assets/icons/farm.png";
-import SearchBar from "../../../components/bars/searchBar/SearchBar";
+import SearchBar from "../../../components/Global/bars/searchBar/SearchBar";
 import {
   LoadingContainer,
   LoadingText,
 } from "../../../ui_elements/CommonStyledElements";
+import UserRoleHOC from "../../../HOCs/UserRoleHOC/UserRoleHOC";
 
 export default function FarmsPage() {
   const {
@@ -33,7 +34,9 @@ export default function FarmsPage() {
         </PageTitle>
         <PageMainButtonsContainer>
           <SearchBar placeholder={searchPlaceholder} onSearch={handleSearch} />
+          <UserRoleHOC>
           <GreenButton onClick={handleCreateFarm}>Create Farm</GreenButton>
+          </UserRoleHOC>
         </PageMainButtonsContainer>
         {farms && <FarmCardsContainer farms={farms} />}
       </LoadingContainer>
