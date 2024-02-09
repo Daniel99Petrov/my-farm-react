@@ -1,4 +1,4 @@
-import RegistrationForm from "../../../components/forms/Global/RegistrationForm";
+import RegistrationForm from "../../../components/forms/Auth/RegistrationForm";
 import { AuthFormContainer, PageWrapper } from "../Auth.styles";
 import signupImg from "../../../assets/signup.jpg";
 import { BackgroundImage } from "../../../components/Global/backgroundImageContainer/BackgroundImageContainer";

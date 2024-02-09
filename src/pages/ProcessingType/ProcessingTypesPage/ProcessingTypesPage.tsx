@@ -10,7 +10,8 @@ import {
 } from "../../../ui_elements/CommonStyledElements";
 import SearchBar from "../../../components/Global/bars/searchBar/SearchBar";
 import { useProcessingTypesPageLogic } from "./processingTypesPage.logic";
-import ProcessingTypeTable from "../../../components/tables/ProcessingTypeTable";
+import ProcessingTypeTable from "../../../components/tables/ProcessingTypeTable/ProcessingTypeTable";
+import UserRoleHOC from "../../../HOCs/UserRoleHOC/UserRoleHOC";
 
 export default function ProcessingTypesPage() {
   const {
@@ -33,9 +34,11 @@ export default function ProcessingTypesPage() {
         </PageTitle>
         <PageMainButtonsContainer>
           <SearchBar placeholder={searchPlaceholder} onSearch={handleSearch} />
-          <GreenButton onClick={handleCreateProcessingType}>
-            Create Processing Type
-          </GreenButton>
+          <UserRoleHOC>
+            <GreenButton onClick={handleCreateProcessingType}>
+              Create Processing Type
+            </GreenButton>
+          </UserRoleHOC>
         </PageMainButtonsContainer>
         <Container>
           {processingTypes && (

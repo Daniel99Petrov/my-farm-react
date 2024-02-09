@@ -17,6 +17,8 @@ import {
 import FieldDetailsInfo from "./FieldDetailsInfo";
 import GrowingPeriodCardsContainer from "../../../components/cards/growing_period_card/GrowingPeriodCardContainer";
 import { ProcessingButtonsContainer } from "./styles/FieldDetailsPage.styles";
+import UserRoleHOC from "../../../HOCs/UserRoleHOC/UserRoleHOC";
+import { fieldDetailButtons } from "./static/FieldDetailsPage.static";
 
 const FieldDetailsPage = () => {
   const { fieldId } = useParams();
@@ -36,28 +38,31 @@ const FieldDetailsPage = () => {
             <DetailsInfoContainer>
               <FieldDetailsInfo
                 soilName={soil?.name}
-                // TODO change this to a modal on hover
                 coordinates={field.borders.coordinates}
                 farmName={farm?.name}
               ></FieldDetailsInfo>
+              <UserRoleHOC>
               <UpdateButtonContainer>
                 <BigBlueButton onClick={() => handleUpdateFieldInfo(field.id)}>
-                  Update Field Info
+                  {fieldDetailButtons.update}
                 </BigBlueButton>
                 <RedButton onClick={() => handleDeleteField(field.id)}>
-                  Delete Field 
+                {fieldDetailButtons.delete}
                 </RedButton>
               </UpdateButtonContainer>
+              </UserRoleHOC>
             </DetailsInfoContainer>
           </MapDetailsContainer>
+          <UserRoleHOC>
           <ProcessingButtonsContainer>
             <GreenButton onClick={() => handleCreateGrowingPeriod(field.id)}>
-            Create Growing Period
+            {fieldDetailButtons.createPeriod}
             </GreenButton>
             <GreenButton onClick={() => handleCreateProcessing(field.id, growingPeriods[0]?.id)}>
-            Add New Processing
+            {fieldDetailButtons.createProcessing}
             </GreenButton>
           </ProcessingButtonsContainer>
+          </UserRoleHOC>
           <GrowingPeriodCardsContainer growingPeriods={growingPeriods} />
         </div>
       )}

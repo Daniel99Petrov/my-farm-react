@@ -1,75 +1,18 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import LogoutModal from "../../modals/ConfirmModal";
+import { Link } from "react-router-dom";
+import LogoutModal from "../../modals/ConfirmModal/ConfirmModal";
 import { Container } from "../../../../ui_elements/CommonStyledElements";
-import { useAuth } from "../../../../contexts/AuthContext";
-
-const StyledNav = styled.nav`
-  ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    overflow: hidden;
-
-    li {
-      margin-right: 10px;
-
-      a {
-        text-decoration: none;
-        color: #2ecc71; /* Green color related to agro/farms */
-        font-weight: bold;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-  }
-`;
-
-const AuthLinks = styled.div`
-  margin-left: auto;
-  overflow: hidden;
-
-  a {
-    color: #3498db; /* Blue color related to authentication links */
-    text-decoration: none;
-    margin-right: 10px;
-    font-weight: bold;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
+import { StyledNav, AuthLinks } from "./navbar.styles";
+import { useNavbarLogic } from "./navbar.logic";
 
 export default function Navbar() {
-  const modalMessage = `Are you sure you want to logout?`;
-  const navigate = useNavigate();
-  const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
-  const { isAuthenticated, logout } = useAuth();
-
-  const handleLogout = () => {
-    // Open the logout confirmation modal
-    setLogoutModalOpen(true);
-  };
-
-  const handleConfirmLogout = () => {
-    // TODO logout actually removes the item from locStorage so I don't need setItem("")
-    logout();
-    // Clear the authentication token from local storage
-    // localStorage.setItem("token", "");
-    // Redirect to the home page or login page
-    navigate("/user/signin");
-    // Close the logout confirmation modal
-    setLogoutModalOpen(false);
-  };
-
-  const handleCancelLogout = () => {
-    // Close the logout confirmation modal
-    setLogoutModalOpen(false);
-  };
+  const {
+    modalMessage,
+    isLogoutModalOpen,
+    handleLogout,
+    handleConfirmLogout,
+    handleCancelLogout,
+    isAuthenticated,
+  } = useNavbarLogic();
   return (
     <StyledNav>
       <Container>

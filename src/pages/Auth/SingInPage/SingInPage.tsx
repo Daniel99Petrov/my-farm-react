@@ -1,5 +1,5 @@
 import signinImg from "../../../assets/signin.jpg";
-import SignInForm from "../../../components/forms/Global/SignInForm";
+import SignInForm from "../../../components/forms/Auth/SignInForm";
 import { AuthFormContainer, PageWrapper } from "../Auth.styles";
 import { BackgroundImage } from "../../../components/Global/backgroundImageContainer/BackgroundImageContainer";
 

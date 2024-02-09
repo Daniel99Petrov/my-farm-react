@@ -10,7 +10,8 @@ import {
   TitleImage,
 } from "../../../ui_elements/CommonStyledElements";
 import SearchBar from "../../../components/Global/bars/searchBar/SearchBar";
-import CropTable from "../../../components/tables/CropTable";
+import CropTable from "../../../components/tables/CropTable/CropTable";
+import UserRoleHOC from "../../../HOCs/UserRoleHOC/UserRoleHOC";
 
 export default function CropsPage() {
   const {
@@ -33,7 +34,9 @@ export default function CropsPage() {
         </PageTitle>
         <PageMainButtonsContainer>
           <SearchBar placeholder={searchPlaceholder} onSearch={handleSearch} />
-          <GreenButton onClick={handleCreateCrop}>Create Crop</GreenButton>
+          <UserRoleHOC>
+            <GreenButton onClick={handleCreateCrop}>Create Crop</GreenButton>
+          </UserRoleHOC>
         </PageMainButtonsContainer>
         <Container>
           {crops && <CropTable crops={crops} onDeleteCrop={handleDeleteCrop} />}

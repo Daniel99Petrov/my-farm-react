@@ -23,6 +23,7 @@ import {
 import processingIcon from "../../../assets/icons/processing.png";
 import { useNavigate } from "react-router-dom";
 import { Table, TableCell, TableHeader, TableRow } from "./ProcessingPage.styles";
+import UserRoleHOC from "../../../HOCs/UserRoleHOC/UserRoleHOC";
 
 
 
@@ -169,12 +170,14 @@ export default function ProcessingPage() {
         <TitleImage src={processingIcon} alt="Processing Icon" />
         {title}
       </PageTitle>
+      <UserRoleHOC>
       <PageMainButtonsContainer>
         To Create a new processing, please chose a field
         <BigBlueButton onClick={handleChoseField}>
           Chose Field
         </BigBlueButton>
       </PageMainButtonsContainer>
+      </UserRoleHOC>
       <Container>
       <Table>
         {renderTableHeader()}

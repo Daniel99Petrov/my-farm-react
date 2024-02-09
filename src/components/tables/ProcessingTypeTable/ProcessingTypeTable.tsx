@@ -1,5 +1,6 @@
-import { ProcessingType } from "../../static/types/types";
-import UniversalTable from "./UniversalTable";
+import UserRoleHOC from "../../../HOCs/UserRoleHOC/UserRoleHOC";
+import { ProcessingType } from "../../../static/types/types";
+import UniversalTable from "../UniversalTable/UniversalTable";
 
 interface ProcessingTypeTableProps {
   processingTypes: ProcessingType[];
@@ -7,7 +8,8 @@ interface ProcessingTypeTableProps {
 }
 
 const ProcessingTypeTable: React.FC<ProcessingTypeTableProps> = ({
-  processingTypes, onDeleteProcessingType
+  processingTypes,
+  onDeleteProcessingType,
 }) => {
   const columns = [
     { key: "name", header: "Name" },
@@ -15,7 +17,11 @@ const ProcessingTypeTable: React.FC<ProcessingTypeTableProps> = ({
       key: "actions",
       header: "Actions",
       render: (rowData: ProcessingType) => (
-        <button onClick={() => onDeleteProcessingType(rowData.id)}>Delete</button>
+        <UserRoleHOC>
+          <button onClick={() => onDeleteProcessingType(rowData.id)}>
+            Delete
+          </button>
+        </UserRoleHOC>
       ),
     },
   ];

@@ -1,4 +1,4 @@
-import { StyledDetailBullet } from "./DetailBullet.styles";
+import { StyledDetailBullet } from "./detailBullet.styles";
 import { DetailBulletProps } from "./detailBullet.static";
 
 const DetailBullet: React.FC<DetailBulletProps> = ({ icon, value }) => {

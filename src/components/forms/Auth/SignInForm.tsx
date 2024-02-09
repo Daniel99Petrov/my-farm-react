@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Input from "./Input/Input";
+import Input from "../Global/Input/Input";
 import {
   FormContainer,
   FormItems,
@@ -8,7 +8,6 @@ import {
 } from "../../../ui_elements/CommonStyledElements";
 import { useAuth } from "../../../contexts/AuthContext";
 import { isNotEmpty } from "../../../utils/validation";
-
 
 export default function SignInForm() {
   const { login } = useAuth();
@@ -71,37 +70,37 @@ export default function SignInForm() {
   };
 
   return (
-      <FormContainer>
-        <FormItems onSubmit={handleSignIn}>
-          <h2>Sign In</h2>
-          <Input
-            label="Username"
-            id="username"
-            type="text"
-            name="username"
-            onBlur={() => handleInputBlur("username")}
-            onChange={(event: { target: { value: string } }) =>
-              handleInputChange("username", event.target.value)
-            }
-            value={formData.username}
-            error={usernameIsInvalid && "Please enter a username!"}
-            required
-          />
-          <Input
-            label="Password"
-            id="password"
-            type="password"
-            name="password"
-            onBlur={() => handleInputBlur("password")}
-            onChange={(event: { target: { value: string } }) =>
-              handleInputChange("password", event.target.value)
-            }
-            value={formData.password}
-            error={passwordIsInvalid && "Please enter a password!"}
-            required
-          />
-          <GreenButton>Sign In</GreenButton>
-        </FormItems>
-      </FormContainer>
+    <FormContainer>
+      <FormItems onSubmit={handleSignIn}>
+        <h2>Sign In</h2>
+        <Input
+          label="Username"
+          id="username"
+          type="text"
+          name="username"
+          onBlur={() => handleInputBlur("username")}
+          onChange={(event: { target: { value: string } }) =>
+            handleInputChange("username", event.target.value)
+          }
+          value={formData.username}
+          error={usernameIsInvalid && "Please enter a username!"}
+          required
+        />
+        <Input
+          label="Password"
+          id="password"
+          type="password"
+          name="password"
+          onBlur={() => handleInputBlur("password")}
+          onChange={(event: { target: { value: string } }) =>
+            handleInputChange("password", event.target.value)
+          }
+          value={formData.password}
+          error={passwordIsInvalid && "Please enter a password!"}
+          required
+        />
+        <GreenButton>Sign In</GreenButton>
+      </FormItems>
+    </FormContainer>
   );
 }

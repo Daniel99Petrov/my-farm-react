@@ -1,5 +1,6 @@
-import { Soil } from "../../static/types/types";
-import UniversalTable from "./UniversalTable";
+import UserRoleHOC from "../../../HOCs/UserRoleHOC/UserRoleHOC";
+import { Soil } from "../../../static/types/types";
+import UniversalTable from "../UniversalTable/UniversalTable";
 
 interface SoilTableProps {
   soils: Soil[];
@@ -13,7 +14,9 @@ const SoilTable: React.FC<SoilTableProps> = ({ soils, onDeleteSoil }) => {
       key: "actions",
       header: "Actions",
       render: (rowData: Soil) => (
-        <button onClick={() => onDeleteSoil(rowData.id)}>Delete</button>
+        <UserRoleHOC>
+          <button onClick={() => onDeleteSoil(rowData.id)}>Delete</button>
+        </UserRoleHOC>
       ),
     },
     //   { key: "variety", header: "Variety" },
@@ -28,14 +31,14 @@ const SoilTable: React.FC<SoilTableProps> = ({ soils, onDeleteSoil }) => {
 
   return (
     <div>
-    {soils && (
-    <UniversalTable
-      data={soils}
-      columns={columns}
-      onRowClick={handleRowClick}
-    />
-  )}
-  </div>
+      {soils && (
+        <UniversalTable
+          data={soils}
+          columns={columns}
+          onRowClick={handleRowClick}
+        />
+      )}
+    </div>
   );
 };
 

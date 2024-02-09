@@ -10,6 +10,8 @@ import {
 import { DetailsInfoContainer } from "../../Farm/FarmDetailsPage/styles/farmDetailsInfo.styles";
 import MachineDetailsInfo from "./MachineDetailsInfo";
 import { MachineDetailsPageLogic } from "./logic/machineDetailsPage.logic";
+import UserRoleHOC from "../../../HOCs/UserRoleHOC/UserRoleHOC";
+import { machineDetailButtons } from "./static/machineDetails.static";
 
 const MachineDetailsPage = () => {
   const { machineId } = useParams();
@@ -27,18 +29,19 @@ const MachineDetailsPage = () => {
           <DetailsInfoContainer>
             <MachineDetailsInfo
               brand={machine?.brand}
-              // TODO change this to a modal on hover
               model={machine?.model}
               farmName={farm?.name}
             ></MachineDetailsInfo>
+            <UserRoleHOC>
             <UpdateButtonContainer>
               <BigBlueButton onClick={() => handleUpdateMachineInfo(machine.id)}>
-                Update Machine Info
+                {machineDetailButtons.update}
               </BigBlueButton>
               <RedButton onClick={() => handleDeleteMachine(machine.id)}>
-                Delete Machine
+                {machineDetailButtons.delete}
               </RedButton>
             </UpdateButtonContainer>
+            </UserRoleHOC>
           </DetailsInfoContainer>
           <h1> More Info Will be available soon!</h1>
         </div>

@@ -1,5 +1,6 @@
-import { Crop } from "../../static/types/types";
-import UniversalTable from "./UniversalTable";
+import UserRoleHOC from "../../../HOCs/UserRoleHOC/UserRoleHOC";
+import { Crop } from "../../../static/types/types";
+import UniversalTable from "../UniversalTable/UniversalTable";
 
 interface CropTableProps {
   crops: Crop[];
@@ -13,12 +14,11 @@ const CropTable: React.FC<CropTableProps> = ({ crops, onDeleteCrop }) => {
       key: "actions",
       header: "Actions",
       render: (rowData: Crop) => (
-        <button onClick={() => onDeleteCrop(rowData.id)}>Delete</button>
+        <UserRoleHOC>
+          <button onClick={() => onDeleteCrop(rowData.id)}>Delete</button>
+        </UserRoleHOC>
       ),
     },
-    //   { key: "variety", header: "Variety" },
-    //   { key: "quantity", header: "Quantity" },
-    // Add more columns as needed
   ];
 
   const handleRowClick = (cropId: string) => {

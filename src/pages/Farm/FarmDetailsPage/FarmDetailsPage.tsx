@@ -20,6 +20,8 @@ import {
 import { ToggleButtonsContainer } from "./styles/farmDetailsPage.styles";
 import MachineCardsContainer from "../../../components/cards/machine_card/MachineCardsContainer";
 import { FarmDetailsPageLogic } from "./logic/farmDetailsPage.logic";
+import UserRoleHOC from "../../../HOCs/UserRoleHOC/UserRoleHOC";
+import { farmDetailButtons } from "./static/farmDetails.static";
 
 const FarmDetailsPage = () => {
   const { farmId } = useParams();
@@ -50,36 +52,42 @@ const FarmDetailsPage = () => {
                 fieldsCount={fields.length}
                 machinesCount={machines.length}
               ></FarmDetailsInfo>
-              <UpdateButtonContainer>
-                <BigBlueButton onClick={() => handleUpdateFarmInfo(farm.id)}>
-                  Update Farm Info
-                </BigBlueButton>
-                <RedButton onClick={() => handleDeleteFarm(farm.id)}>
-                  Delete Farm
-                </RedButton>
-              </UpdateButtonContainer>
+              <UserRoleHOC>
+                <UpdateButtonContainer>
+                  <BigBlueButton onClick={() => handleUpdateFarmInfo(farm.id)}>
+                    {farmDetailButtons.update}
+                  </BigBlueButton>
+                  <RedButton onClick={() => handleDeleteFarm(farm.id)}>
+                    {farmDetailButtons.delete}
+                  </RedButton>
+                </UpdateButtonContainer>
+              </UserRoleHOC>
             </DetailsInfoContainer>
           </MapDetailsContainer>
           <ToggleButtonsContainer>
-            {/* TODO format the buttons to be better looking */}
-            <button
+            <BigBlueButton
               onClick={toggleShowFields as MouseEventHandler<HTMLButtonElement>}
-              style={{ fontWeight: showFields ? "bold" : "normal" }}
+              style={{
+                fontWeight: showFields ? "bold" : "normal",
+                backgroundColor: showFields ? "lightblue" : "",
+              }}
             >
-              Show Fields
-            </button>
-            <button
+              {farmDetailButtons.showFields}
+            </BigBlueButton>
+            <BigBlueButton
               onClick={toggleShowFields as MouseEventHandler<HTMLButtonElement>}
-              style={{ fontWeight: !showFields ? "bold" : "normal" }}
+              style={{
+                fontWeight: !showFields ? "bold" : "normal",
+                backgroundColor: !showFields ? "lightblue" : "",
+              }}
             >
-              Show Machines
-            </button>
+              {farmDetailButtons.showMachines}
+            </BigBlueButton>
           </ToggleButtonsContainer>
-          {/* {fields && <FieldCardsContainer fields={fields} />} */}
           {showFields ? (
             <FieldCardsContainer fields={fields} />
           ) : (
-            <MachineCardsContainer machines={machines} /> // Conditionally render MachineCardsContainer
+            <MachineCardsContainer machines={machines} />
           )}
         </div>
       )}

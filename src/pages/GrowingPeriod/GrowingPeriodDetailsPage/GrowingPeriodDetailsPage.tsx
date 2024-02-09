@@ -5,57 +5,70 @@ import { fetchProcessingsByGrowingPeriodId } from "../../../services/processingS
 import useMachines from "../../../hooks/Machine/UseMachines";
 import useProcessingTypes from "../../../hooks/ProcessingType/UseProcessingTypes";
 import useCrops from "../../../hooks/Crop/UseCrops";
-import { Table, TableCell, TableHeader, TableRow } from "./GrowingPeriodDetailsPage.styles";
+import {
+  Table,
+  TableCell,
+  TableHeader,
+  TableRow,
+} from "./GrowingPeriodDetailsPage.styles";
 import { fetchGrowingPeriodDetails } from "../../../services/growingPeriodService";
-import { Container, GreenButton, PageMainButtonsContainer, PageTitle, TitleImage } from "../../../ui_elements/CommonStyledElements";
+import {
+  Container,
+  GreenButton,
+  PageMainButtonsContainer,
+  PageTitle,
+  TitleImage,
+} from "../../../ui_elements/CommonStyledElements";
 import processingIcon from "../../../assets/icons/processing.png";
 import { routes } from "../../../static/routes/routes";
+import UserRoleHOC from "../../../HOCs/UserRoleHOC/UserRoleHOC";
 
 const GrowingPeriodDetailsPage = () => {
-    const itemsPerPage = 10;
-    const [currentPage, setCurrentPage] = useState(1);
-    const [processingList, setProcessingList] = useState<Processing[]>([]);
-    const [growingPeriod, setGrowingPeriod] = useState<GrowingPeriod>();
-    const title = "Processings in this growing period";
-    const navigate = useNavigate();
-    const {growingPeriodId} = useParams()
-    const {machines} = useMachines();
-    const {processingTypes} = useProcessingTypes();
-    const {crops} = useCrops();
-    const handleCreateProcessing = (id: string) => {
-      navigate(routes.createProcessing.replace(":growingPeriodId", id));
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [processingList, setProcessingList] = useState<Processing[]>([]);
+  const [growingPeriod, setGrowingPeriod] = useState<GrowingPeriod>();
+  const title = "Processings in this growing period";
+  const navigate = useNavigate();
+  const { growingPeriodId } = useParams();
+  const { machines } = useMachines();
+  const { processingTypes } = useProcessingTypes();
+  const { crops } = useCrops();
+  const handleCreateProcessing = (id: string) => {
+    navigate(routes.createProcessing.replace(":growingPeriodId", id));
+  };
+
+  useEffect(() => {
+    const fetchProcessingData = async () => {
+      try {
+        const processingsData = await fetchProcessingsByGrowingPeriodId(
+          growingPeriodId
+        );
+
+        const sortedProcessings = processingsData.sort((a, b) => {
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
+        setProcessingList(sortedProcessings);
+      } catch (error) {
+        console.error("Error during fetch processing data:", error);
+      }
+    };
+    const loadGrowingPeriod = async () => {
+      try {
+        const growingPeriodData = await fetchGrowingPeriodDetails(
+          growingPeriodId
+        );
+        setGrowingPeriod(growingPeriodData);
+      } catch (error) {
+        console.error("Error loading field details:", error);
+      }
     };
 
-      
-      useEffect(() => {
-        const fetchProcessingData = async () => {
-          try {
-            const processingsData = await fetchProcessingsByGrowingPeriodId(growingPeriodId);
-    
-            const sortedProcessings = processingsData.sort((a, b) => {
-              return new Date(b.date).getTime() - new Date(a.date).getTime();
-            });
-            setProcessingList(sortedProcessings);
-          } catch (error) {
-            console.error("Error during fetch processing data:", error);
-          }
-        };
-        const loadGrowingPeriod = async () => {
-            try {
-              const growingPeriodData = await fetchGrowingPeriodDetails(growingPeriodId);
-              setGrowingPeriod(growingPeriodData);
-            } catch (error) {
-              console.error("Error loading field details:", error);
-            }
-          };
+    fetchProcessingData();
+    loadGrowingPeriod();
+  }, [growingPeriodId]);
 
-        fetchProcessingData();
-        loadGrowingPeriod();
-    }, [growingPeriodId]);
-
-
-
-    const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = processingList.slice(indexOfFirstItem, indexOfLastItem);
 
@@ -72,7 +85,7 @@ const GrowingPeriodDetailsPage = () => {
   const renderTableBody = () => (
     <tbody>
       {currentItems.map((processing) => {
-        const processingType = (processingTypes)?.find(
+        const processingType = processingTypes?.find(
           (type) => type.id === processing.processingTypeId
         );
         const machine = machines?.find(
@@ -95,42 +108,46 @@ const GrowingPeriodDetailsPage = () => {
   );
   return (
     <div>
-    {growingPeriodId && ( 
-      <div>
-      <PageTitle>
-        <TitleImage src={processingIcon} alt="Processing Icon" />
-        {title}
-      </PageTitle>
-      <PageMainButtonsContainer>
-        <GreenButton onClick={() => handleCreateProcessing(growingPeriodId)}>
-          Create Processing
-        </GreenButton>
-      </PageMainButtonsContainer>
-      <Container>
-      <Table>
-        {renderTableHeader()}
-        {renderTableBody()}
-      </Table>
-      {/* Pagination */}
-      <div>
-        <button
-          onClick={() => setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous Page
-        </button>
-        <span>Page {currentPage}</span>
-        <button
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={indexOfLastItem >= processingList.length}
-        >
-          Next Page
-        </button>
-      </div>
-      </Container>
-      </div>
+      {growingPeriodId && (
+        <div>
+          <PageTitle>
+            <TitleImage src={processingIcon} alt="Processing Icon" />
+            {title}
+          </PageTitle>
+          <UserRoleHOC>
+            <PageMainButtonsContainer>
+              <GreenButton
+                onClick={() => handleCreateProcessing(growingPeriodId)}
+              >
+                Create Processing
+              </GreenButton>
+            </PageMainButtonsContainer>
+          </UserRoleHOC>
+          <Container>
+            <Table>
+              {renderTableHeader()}
+              {renderTableBody()}
+            </Table>
+            {/* Pagination */}
+            <div>
+              <button
+                onClick={() => setCurrentPage(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                Previous Page
+              </button>
+              <span>Page {currentPage}</span>
+              <button
+                onClick={() => setCurrentPage(currentPage + 1)}
+                disabled={indexOfLastItem >= processingList.length}
+              >
+                Next Page
+              </button>
+            </div>
+          </Container>
+        </div>
       )}
-      </div>
+    </div>
   );
 };
 export default GrowingPeriodDetailsPage;

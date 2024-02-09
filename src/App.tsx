@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Global/header/Header";
-import HomePage from "./pages/Home/HomePage";
 import FarmsPage from "./pages/Farm/FarmsPage/FarmsPage";
 import FieldsPage from "./pages/Field/FieldsPage/FieldsPage";
 import ProcessingPage from "./pages/Processing/ProcessingPage/ProcessingPage";
@@ -39,7 +38,6 @@ function App() {
           <Header />
           <Routes>
             {/* <Route element={<PrivateRoutes />}> */}
-            {/* <Route path={routes.welcome} element={<HomePage />} /> */}
             <Route path={routes.farm} element={<FarmsPage />} />
             <Route path={routes.farmDetails} element={<FarmDetailsPage />} />
             <Route path={routes.createFarm} element={<CreateFarmPage />} />

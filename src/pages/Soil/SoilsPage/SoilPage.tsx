@@ -9,8 +9,9 @@ import {
   TitleImage,
 } from "../../../ui_elements/CommonStyledElements";
 import SearchBar from "../../../components/Global/bars/searchBar/SearchBar";
-import SoilTable from "../../../components/tables/SoilTable";
+import SoilTable from "../../../components/tables/SoilTable/SoilTable";
 import { useSoilsPageLogic } from "./soilPage.logic";
+import UserRoleHOC from "../../../HOCs/UserRoleHOC/UserRoleHOC";
 
 export default function SoilsPage() {
   const {
@@ -33,7 +34,9 @@ export default function SoilsPage() {
         </PageTitle>
         <PageMainButtonsContainer>
           <SearchBar placeholder={searchPlaceholder} onSearch={handleSearch} />
-          <GreenButton onClick={handleCreateSoil}>Create Soil</GreenButton>
+          <UserRoleHOC>
+            <GreenButton onClick={handleCreateSoil}>Create Soil</GreenButton>
+          </UserRoleHOC>
         </PageMainButtonsContainer>
         <Container>
           {soils && <SoilTable soils={soils} onDeleteSoil={handleDeleteSoil} />}

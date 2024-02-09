@@ -1,4 +1,4 @@
-import DetailBullet from "../../../components/Global/bullets/DetailBullet";
+import DetailBullet from "../../../components/Global/bullets/DetailBullet/DetailBullet";
 import fieldIcon from "../../../assets/icons/field.png";
 import machineIcon from "../../../assets/icons/machine.png";
 import locationIcon from "../../../assets/icons/location.png";

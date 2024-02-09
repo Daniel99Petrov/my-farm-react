@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Machine } from "../../../static/types/types";
 
 export const MachineImage = styled.img`
   width: 100%;
@@ -7,15 +6,7 @@ export const MachineImage = styled.img`
   object-fit: cover;
 `;
 
-export interface MachineCardContainerProps {
-  machines: Machine[];
-}
-
 export const MachineCardsContainerWrapper = styled.div`
-  /* h2 {
-    margin-bottom: 10px;
-  } */
-
   background-color: aliceblue;
   margin: 10px auto;
   padding: 10px 20px;
@@ -44,7 +35,7 @@ export const StyledMachineCard = styled.div`
   background-color: #fff;
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: #8dd76d;
     transform: scale(1.05);
   }
 `;

@@ -9,7 +9,7 @@ export const StyledFieldCard = styled.div`
   background-color: #fff;
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: #8dd76d;
     transform: scale(1.05);
   }
 `;

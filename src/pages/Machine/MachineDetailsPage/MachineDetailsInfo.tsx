@@ -1,4 +1,4 @@
-import DetailBullet from "../../../components/Global/bullets/DetailBullet";
+import DetailBullet from "../../../components/Global/bullets/DetailBullet/DetailBullet";
 import soilIcon from "../../../assets/icons/location.png";
 import farmIcon from "../../../assets/icons/farm.png";
 import { MachineDetailsInterface } from "./static/machineDetails.static";

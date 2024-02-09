@@ -1,7 +1,7 @@
 import { Container } from "../../../ui_elements/CommonStyledElements";
 import MachineCard from "./MachineCard";
+import { MachineCardContainerProps } from "./MachineCard.static";
 import {
-  MachineCardContainerProps,
   MachineCardsContainerWrapper,
 } from "./MachineCard.style";
 

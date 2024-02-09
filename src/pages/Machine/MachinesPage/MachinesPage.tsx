@@ -10,6 +10,7 @@ import {
 import SearchBar from "../../../components/Global/bars/searchBar/SearchBar";
 import { useMachinesPageLogic } from "./machinesPage.logic";
 import MachineCardsContainer from "../../../components/cards/machine_card/MachineCardsContainer";
+import UserRoleHOC from "../../../HOCs/UserRoleHOC/UserRoleHOC";
 
 export default function MachinesPage() {
   const {
@@ -31,7 +32,9 @@ export default function MachinesPage() {
         </PageTitle>
         <PageMainButtonsContainer>
           <SearchBar placeholder={searchPlaceholder} onSearch={handleSearch} />
+          <UserRoleHOC>
           <GreenButton onClick={handleCreateField}>Create Machine</GreenButton>
+          </UserRoleHOC>
         </PageMainButtonsContainer>
         {machines && <MachineCardsContainer machines={machines} />}
       </LoadingContainer>

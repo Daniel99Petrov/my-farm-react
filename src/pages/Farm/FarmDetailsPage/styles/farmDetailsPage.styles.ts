@@ -15,8 +15,6 @@ export const ToggleButtonsContainer = styled.div`
 `;
 
 export const ToggleButton = styled.button<ToggleButtonProps>`
-  /* Your existing styles */
-  /* ... */
 
   ${({ isActive }) =>
     isActive &&
