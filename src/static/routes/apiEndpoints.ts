@@ -50,4 +50,5 @@ export const apiEndpoints = {
   growingPeriodDetails: "/growing-period/:growingPeriodId",
   growingPeriodsByField: "/growing-period/by-field/:fieldId",
   createGrowingPeriod: "/growing-period",
+  deleteGrowingPeriod: "/growing-period/:growingPeriodId",
 };

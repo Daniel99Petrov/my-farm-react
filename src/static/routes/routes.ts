@@ -15,6 +15,7 @@ export const routes = {
   updateMachine: "/machine-update/:machineId",
   growingPeriod: "/growing-period",
   growingPeriodDetails: "/growing-period/:growingPeriodId",
+  deleteGrowingPeriod: "/growing-period/:growingPeriodId",
   createGrowingPeriod: "/growing-period-create/:fieldId",
   processing: "/processing",
   createProcessing: "/processing-create/:growingPeriodId",

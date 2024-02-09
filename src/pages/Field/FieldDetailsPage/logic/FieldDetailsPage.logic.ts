@@ -3,7 +3,6 @@ import { fetchFieldDetails } from "../../../../services/fieldService";
 import {
   Farm,
   Field,
-  GrowingPeriod,
   Soil,
 } from "../../../../static/types/types";
 import L from "leaflet";
@@ -12,17 +11,21 @@ import { fetchFarmDetails } from "../../../../services/farmService";
 import useDeleteField from "../../../../hooks/Field/UseDeleteField";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../../../static/routes/routes";
-import { fetchGrowingPeriodsByFieldId } from "../../../../services/growingPeriodService";
+
+import { useGrowingPeriodsByFieldId } from "../../../../hooks/GrowingPeriod/UseGrowingPeriodsByFieldId";
 
 export const FieldDetailsPageLogic = (fieldId: string | undefined) => {
   const [field, setField] = useState<Field | null>(null);
   const [soil, setSoil] = useState<Soil | null>(null);
   const [farm, setFarm] = useState<Farm | null>(null);
-  const [growingPeriods, setGrowingPeriods] = useState<GrowingPeriod[]>([]);
+  // const [growingPeriods, setGrowingPeriods] = useState<GrowingPeriod[]>([]);
   const { deleteField } = useDeleteField();
   const navigate = useNavigate();
   const mapRef = useRef<L.Map | null>(null);
-
+  let {growingPeriods} = useGrowingPeriodsByFieldId(fieldId);
+  if(!growingPeriods) {
+    growingPeriods = [];
+  }
   useEffect(() => {
     const loadField = async () => {
       try {
@@ -32,17 +35,17 @@ export const FieldDetailsPageLogic = (fieldId: string | undefined) => {
         console.error("Error loading field details:", error);
       }
     };
-    const loadGrowingPeriods = async () => {
-      try {
-        const growingPeriodsData = await fetchGrowingPeriodsByFieldId(fieldId);
-        setGrowingPeriods(growingPeriodsData);
-      } catch (error) {
-        console.error("Error loading growing periods:", error);
-      }
-    };
+    // const loadGrowingPeriods = async () => {
+    //   try {
+    //     const growingPeriodsData = await fetchGrowingPeriodsByFieldId(fieldId);
+    //     setGrowingPeriods(growingPeriodsData);
+    //   } catch (error) {
+    //     console.error("Error loading growing periods:", error);
+    //   }
+    // };
 
     loadField();
-    loadGrowingPeriods();
+    // loadGrowingPeriods();
   }, [fieldId]);
 
   useEffect(() => {
@@ -110,7 +113,7 @@ export const FieldDetailsPageLogic = (fieldId: string | undefined) => {
   const handleCreateGrowingPeriod = (id: string) => {
     navigate(routes.createGrowingPeriod.replace(":fieldId", id));
   };
-  const handleCreateProcessing = (fieldId: string, growingPeriodId: string) => {
+  const handleCreateProcessing = (fieldId: string, growingPeriodId: string | undefined) => {
     if (growingPeriodId) {
       navigate(
         routes.createProcessing.replace(":growingPeriodId", growingPeriodId)

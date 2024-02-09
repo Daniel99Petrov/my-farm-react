@@ -17,11 +17,13 @@ import {
   GreenButton,
   PageMainButtonsContainer,
   PageTitle,
+  RedButton,
   TitleImage,
 } from "../../../ui_elements/CommonStyledElements";
 import processingIcon from "../../../assets/icons/processing.png";
 import { routes } from "../../../static/routes/routes";
 import UserRoleHOC from "../../../HOCs/UserRoleHOC/UserRoleHOC";
+import useDeleteGrowingPeriod from "../../../hooks/GrowingPeriod/UseDeleteGrowingPeriodByFieldId";
 
 const GrowingPeriodDetailsPage = () => {
   const itemsPerPage = 10;
@@ -34,8 +36,13 @@ const GrowingPeriodDetailsPage = () => {
   const { machines } = useMachines();
   const { processingTypes } = useProcessingTypes();
   const { crops } = useCrops();
+  const {deleteGrowingPeriod} = useDeleteGrowingPeriod(growingPeriod?.fieldId);
   const handleCreateProcessing = (id: string) => {
     navigate(routes.createProcessing.replace(":growingPeriodId", id));
+  };
+  const handleDeleteGrowingPeriod = (id: string, fieldId: string) => {
+    deleteGrowingPeriod(id);
+      navigate(routes.fieldDetails.replace(":fieldId", fieldId));
   };
 
   useEffect(() => {
@@ -108,7 +115,7 @@ const GrowingPeriodDetailsPage = () => {
   );
   return (
     <div>
-      {growingPeriodId && (
+      {growingPeriodId && growingPeriod && (
         <div>
           <PageTitle>
             <TitleImage src={processingIcon} alt="Processing Icon" />
@@ -121,6 +128,9 @@ const GrowingPeriodDetailsPage = () => {
               >
                 Create Processing
               </GreenButton>
+              <RedButton onClick={() => handleDeleteGrowingPeriod(growingPeriodId, growingPeriod?.fieldId)}>
+                    Delete Growing Period
+                  </RedButton>
             </PageMainButtonsContainer>
           </UserRoleHOC>
           <Container>
