@@ -8,10 +8,12 @@ import {
 } from "../../../ui_elements/CommonStyledElements";
 import { useAuth } from "../../../contexts/AuthContext";
 import { isNotEmpty } from "../../../utils/validation";
+import ErrorMessage from "../Global/ErrorMessage/ErrorMessage";
 
 export default function SignInForm() {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -57,12 +59,12 @@ export default function SignInForm() {
 
       if (response.status === 201) {
         const data = await response.json();
-        // localStorage.setItem("token", data.access_token);
         login(data.access_token, data.user);
         navigate("/farm", { replace: true });
       } else {
         const errorData = await response.json();
         console.error("Sign-in failed. Unexpected status:", errorData);
+        setErrorMessage(errorData.error.message);
       }
     } catch (error) {
       console.error("Error during sign-in:", error);
@@ -100,6 +102,7 @@ export default function SignInForm() {
           required
         />
         <GreenButton>Sign In</GreenButton>
+        {errorMessage && <ErrorMessage message={errorMessage} />}
       </FormItems>
     </FormContainer>
   );

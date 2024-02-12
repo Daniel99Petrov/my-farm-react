@@ -1,9 +1,9 @@
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
   FormContainer,
   FormItems,
   GreenButton,
+  StyledDatePicker,
 } from "../../../../ui_elements/CommonStyledElements";
 import OptionInput from "../../Global/OptionInput/OptionInput";
 import { registerLocale } from "react-datepicker";
@@ -45,7 +45,7 @@ const CreateProcessingForm: React.FC<CreateProcessingFormProps> = ({
             displayProperty="registrationNumber"
           />
           <label>Date:</label>
-          <DatePicker
+          <StyledDatePicker
             selected={formData.date}
             onChange={handleDateChange}
             dateFormat="MMMM d, yyyy"

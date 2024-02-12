@@ -1,11 +1,9 @@
 import { useMutation } from "react-query";
 import { BASE_URL } from "../../static/constants/constants";
-import { useGrowingPeriodsByFieldId } from "./UseGrowingPeriodsByFieldId";
 import { apiEndpoints } from "../../static/routes/apiEndpoints";
 const deleteGrowingPeriodEndpoint = apiEndpoints.deleteGrowingPeriod;
-export const useDeleteGrowingPeriod = (fieldId: string | undefined) => {
-  const { refetch: refetchGrowingPeriods } =
-    useGrowingPeriodsByFieldId(fieldId); // Refetch function for growing periods
+export const useDeleteGrowingPeriod = () => {
+  
   const deleteGrowingPeriodMutation = useMutation(deleteGrowingPeriod);
 
   async function deleteGrowingPeriod(growingPeriodId: string) {
@@ -31,8 +29,6 @@ export const useDeleteGrowingPeriod = (fieldId: string | undefined) => {
         console.error(`Failed to delete growing period: `, errorMessage);
         throw new Error(`Failed to delete growing period: ${errorMessage}`);
       }
-
-      refetchGrowingPeriods();
     } catch (error) {
       console.error(`Failed to delete growing period: `, error);
     }

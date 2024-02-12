@@ -1,9 +1,16 @@
-function Error() {
-  return (
-    <div>
-      ERROR : PAGE NOT FOUND
-    </div>
-  )
-}
+import { ErrorContainer, ErrorDescription, ErrorMessage } from "./Error.styles";
 
-export default Error
+
+
+const Error = () => {
+  return (
+    <ErrorContainer>
+      <ErrorMessage>ERROR: PAGE NOT FOUND</ErrorMessage>
+      <ErrorDescription>
+        The page you are looking for does not exist.
+      </ErrorDescription>
+    </ErrorContainer>
+  );
+};
+
+export default Error;

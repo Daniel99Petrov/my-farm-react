@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-import { GrowingPeriod, Processing } from "../../../static/types/types";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchProcessingsByGrowingPeriodId } from "../../../services/processingService";
 import useMachines from "../../../hooks/Machine/UseMachines";
 import useProcessingTypes from "../../../hooks/ProcessingType/UseProcessingTypes";
 import useCrops from "../../../hooks/Crop/UseCrops";
@@ -11,7 +9,6 @@ import {
   TableHeader,
   TableRow,
 } from "./GrowingPeriodDetailsPage.styles";
-import { fetchGrowingPeriodDetails } from "../../../services/growingPeriodService";
 import {
   Container,
   GreenButton,
@@ -24,60 +21,39 @@ import processingIcon from "../../../assets/icons/processing.png";
 import { routes } from "../../../static/routes/routes";
 import UserRoleHOC from "../../../HOCs/UserRoleHOC/UserRoleHOC";
 import useDeleteGrowingPeriod from "../../../hooks/GrowingPeriod/UseDeleteGrowingPeriodByFieldId";
+import { useProcessingsByGrowingPeriodId } from "../../../hooks/Processing/UseProcessingsByGrowingPeriodId";
+import { useDeleteProcessingByGrowingPeriodId } from "../../../hooks/Processing/UseDeleteProcessingByGrowingPeriodId";
+import useGrowingPeriodDetails from "../../../hooks/GrowingPeriod/UseGrowingPeriodDetails";
 
 const GrowingPeriodDetailsPage = () => {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
-  const [processingList, setProcessingList] = useState<Processing[]>([]);
-  const [growingPeriod, setGrowingPeriod] = useState<GrowingPeriod>();
   const title = "Processings in this growing period";
   const navigate = useNavigate();
   const { growingPeriodId } = useParams();
   const { machines } = useMachines();
   const { processingTypes } = useProcessingTypes();
   const { crops } = useCrops();
-  const {deleteGrowingPeriod} = useDeleteGrowingPeriod(growingPeriod?.fieldId);
+  const { processings: processingList } =
+    useProcessingsByGrowingPeriodId(growingPeriodId);
+  const { growingPeriod } = useGrowingPeriodDetails(growingPeriodId);
+  const { deleteProcessing } =
+    useDeleteProcessingByGrowingPeriodId(growingPeriodId);
+  const { deleteGrowingPeriod } = useDeleteGrowingPeriod();
   const handleCreateProcessing = (id: string) => {
     navigate(routes.createProcessing.replace(":growingPeriodId", id));
   };
   const handleDeleteGrowingPeriod = (id: string, fieldId: string) => {
     deleteGrowingPeriod(id);
-      navigate(routes.fieldDetails.replace(":fieldId", fieldId));
+    navigate(routes.fieldDetails.replace(":fieldId", fieldId));
   };
-
-  useEffect(() => {
-    const fetchProcessingData = async () => {
-      try {
-        const processingsData = await fetchProcessingsByGrowingPeriodId(
-          growingPeriodId
-        );
-
-        const sortedProcessings = processingsData.sort((a, b) => {
-          return new Date(b.date).getTime() - new Date(a.date).getTime();
-        });
-        setProcessingList(sortedProcessings);
-      } catch (error) {
-        console.error("Error during fetch processing data:", error);
-      }
-    };
-    const loadGrowingPeriod = async () => {
-      try {
-        const growingPeriodData = await fetchGrowingPeriodDetails(
-          growingPeriodId
-        );
-        setGrowingPeriod(growingPeriodData);
-      } catch (error) {
-        console.error("Error loading field details:", error);
-      }
-    };
-
-    fetchProcessingData();
-    loadGrowingPeriod();
-  }, [growingPeriodId]);
+  const handleDeleteProcessing = (id: string) => {
+    deleteProcessing(id);
+  };
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = processingList.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = processingList?.slice(indexOfFirstItem, indexOfLastItem);
 
   const renderTableHeader = () => (
     <thead>
@@ -91,7 +67,7 @@ const GrowingPeriodDetailsPage = () => {
   );
   const renderTableBody = () => (
     <tbody>
-      {currentItems.map((processing) => {
+      {currentItems?.map((processing) => {
         const processingType = processingTypes?.find(
           (type) => type.id === processing.processingTypeId
         );
@@ -108,6 +84,11 @@ const GrowingPeriodDetailsPage = () => {
             <TableCell>{machine?.registrationNumber}</TableCell>
             <TableCell>{crop?.name}</TableCell>
             <TableCell>{processingType?.name}</TableCell>
+            <TableCell>
+              <RedButton onClick={() => handleDeleteProcessing(processing.id)}>
+                Delete
+              </RedButton>
+            </TableCell>
           </TableRow>
         );
       })}
@@ -128,11 +109,19 @@ const GrowingPeriodDetailsPage = () => {
               >
                 Create Processing
               </GreenButton>
-              <RedButton onClick={() => handleDeleteGrowingPeriod(growingPeriodId, growingPeriod?.fieldId)}>
-                    Delete Growing Period
-                  </RedButton>
+              <RedButton
+                onClick={() =>
+                  handleDeleteGrowingPeriod(
+                    growingPeriodId,
+                    growingPeriod?.fieldId
+                  )
+                }
+              >
+                Delete Growing Period
+              </RedButton>
             </PageMainButtonsContainer>
           </UserRoleHOC>
+          {processingList && (
           <Container>
             <Table>
               {renderTableHeader()}
@@ -155,6 +144,7 @@ const GrowingPeriodDetailsPage = () => {
               </button>
             </div>
           </Container>
+          )}
         </div>
       )}
     </div>

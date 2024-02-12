@@ -6,12 +6,13 @@ import { useNavbarLogic } from "./navbar.logic";
 
 export default function Navbar() {
   const {
-    modalMessage,
+    // modalMessage,
     isLogoutModalOpen,
     handleLogout,
     handleConfirmLogout,
     handleCancelLogout,
     isAuthenticated,
+    decodedToken,
   } = useNavbarLogic();
   return (
     <StyledNav>
@@ -48,7 +49,7 @@ export default function Navbar() {
             {!isAuthenticated && <Link to="/user/signup">Sign Up</Link>}
             {isAuthenticated && (
               <Link to="#" onClick={handleLogout}>
-                Logout
+                Profile
               </Link>
             )}
           </AuthLinks>
@@ -58,7 +59,9 @@ export default function Navbar() {
           onClose={handleCancelLogout}
           onConfirm={handleConfirmLogout}
         >
-          {modalMessage}
+          {`Username: ${decodedToken?.username}`}
+          <br />
+          {`Role: ${decodedToken?.role}`}
         </LogoutModal>
       </Container>
     </StyledNav>

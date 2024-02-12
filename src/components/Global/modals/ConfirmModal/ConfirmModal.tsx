@@ -18,8 +18,8 @@ export default function ConfirmModal({
       <ModalContent>
         <p>{children}</p>
         <ButtonContainer>
-          <RedButton onClick={onConfirm}>Yes</RedButton>
-          <GreenButton onClick={onClose}>No</GreenButton>
+          <RedButton onClick={onConfirm}>Logout</RedButton>
+          <GreenButton onClick={onClose}>Cancel</GreenButton>
         </ButtonContainer>
       </ModalContent>
     </ModalOverlay>

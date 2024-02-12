@@ -19,6 +19,7 @@ export const routes = {
   createGrowingPeriod: "/growing-period-create/:fieldId",
   processing: "/processing",
   createProcessing: "/processing-create/:growingPeriodId",
+  deleteProcessing: "/processing-create/:processingId",
   processingType: "/processing-type",
   createProcessingType: "/processing-type-create",
   crop: "/crop",

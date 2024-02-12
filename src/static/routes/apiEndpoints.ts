@@ -25,6 +25,7 @@ export const apiEndpoints = {
   createMachine: "/machine",
   deleteMachine: "/machine/:machineId",
   updateMachine: "/machine/:machineId",
+  transferMachine: "/machine/transfer/:id/:fromFarmId/:toFarmId",
 
   // PROCESSING
   processing: "/processing",

@@ -9,8 +9,10 @@ import {
 import Input from "../Global/Input/Input";
 import { BASE_URL } from "../../../static/constants/constants";
 import { apiEndpoints } from "../../../static/routes/apiEndpoints";
+import ErrorMessage from "../Global/ErrorMessage/ErrorMessage";
 export default function RegistrationForm() {
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
   const [formData, setFormData] = useState({
     email: "",
     username: "",
@@ -59,6 +61,7 @@ export default function RegistrationForm() {
       } else {
         const errorData = await response.json();
         console.error("Registration failed. Unexpected status:", errorData);
+        setErrorMessage(errorData.error.message);
       }
     } catch (error) {
       console.error("Error during registration:", error);
@@ -110,6 +113,7 @@ export default function RegistrationForm() {
         />
         <GreenButton>Sign Up</GreenButton>
       </FormItems>
+      {errorMessage && <ErrorMessage message={errorMessage} />}
     </FormContainer>
   );
 }

@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../contexts/AuthContext";
+import useDecodeToken from "../../../../hooks/JWTdecode/UseDecodeToken";
 
 export const useNavbarLogic = () => {
-    const modalMessage = `Are you sure you want to logout?`;
+  const decodedToken =useDecodeToken();
+  // const modalMessage = `${decodedToken?.username}${decodedToken?.role}`;
     const navigate = useNavigate();
     const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
     const { isAuthenticated, logout } = useAuth();
@@ -22,5 +24,5 @@ export const useNavbarLogic = () => {
       setLogoutModalOpen(false);
     };
   
-    return { modalMessage, isLogoutModalOpen, handleLogout, handleConfirmLogout, handleCancelLogout, isAuthenticated };
+    return { isLogoutModalOpen, handleLogout, handleConfirmLogout, handleCancelLogout, isAuthenticated, decodedToken };
   };

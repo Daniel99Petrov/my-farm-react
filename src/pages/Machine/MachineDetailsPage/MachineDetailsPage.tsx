@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import machineIcon from "../../../assets/icons/machine.png";
 import {
   BigBlueButton,
+  GreenButton,
   PageTitle,
   RedButton,
   TitleImage,
@@ -12,12 +13,13 @@ import MachineDetailsInfo from "./MachineDetailsInfo";
 import { MachineDetailsPageLogic } from "./logic/machineDetailsPage.logic";
 import UserRoleHOC from "../../../HOCs/UserRoleHOC/UserRoleHOC";
 import { machineDetailButtons } from "./static/machineDetails.static";
+import TransferMachineModal from "../../../components/Global/modals/TransferMachineModal/TransferMachineModal";
 
 const MachineDetailsPage = () => {
   const { machineId } = useParams();
-  const { machine, farm, handleUpdateMachineInfo, handleDeleteMachine } =
+  const { machine, farm, isTransferModalOpen,closeTransferModal,openTransferModal,handleUpdateMachineInfo, handleDeleteMachine, handleTransferSubmit, error} =
     MachineDetailsPageLogic(machineId);
-
+    
   return (
     <div>
       {machine && (
@@ -34,6 +36,9 @@ const MachineDetailsPage = () => {
             ></MachineDetailsInfo>
             <UserRoleHOC>
             <UpdateButtonContainer>
+              <GreenButton
+              onClick={() => openTransferModal()}>{machineDetailButtons.transfer}
+              </GreenButton>
               <BigBlueButton onClick={() => handleUpdateMachineInfo(machine.id)}>
                 {machineDetailButtons.update}
               </BigBlueButton>
@@ -43,9 +48,15 @@ const MachineDetailsPage = () => {
             </UpdateButtonContainer>
             </UserRoleHOC>
           </DetailsInfoContainer>
-          <h1> More Info Will be available soon!</h1>
         </div>
       )}
+      <TransferMachineModal
+        isOpen={isTransferModalOpen}
+        onClose={closeTransferModal}
+        onSubmit={handleTransferSubmit}
+        machineId={machineId}
+        error={error}
+      />
     </div>
   );
 };

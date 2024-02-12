@@ -3,10 +3,10 @@ import {
   FormContainer,
   FormItems,
   GreenButton,
+  StyledDatePicker,
 } from "../../../../ui_elements/CommonStyledElements";
 import { registerLocale } from "react-datepicker";
 import en from "date-fns/locale/en-US";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import OptionInput from "../../Global/OptionInput/OptionInput";
 import { useCreateGrowingPeriodFormLogic } from "./CreateGrowingPeriodForm.logic";
@@ -53,7 +53,7 @@ const CreateGrowingPeriodForm: React.FC<CreateGrowingPeriodFormProps> = ({
             required
           />
           <label>Date:</label>
-          <DatePicker
+          <StyledDatePicker
             selected={formData.date}
             onChange={handleDateChange}
             dateFormat="MMMM d, yyyy"

@@ -5,6 +5,7 @@ export interface MachineDetailsInterface {
   }
 
   export const machineDetailButtons = {
+    transfer: "Transfer Machine",
     update: "Update Machine Info",
     delete: "Delete Machine",
   }

@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle, css } from "styled-components";
+import DatePicker from 'react-datepicker';
 
 export const MainHolder = styled.section`
   width: 100%;
@@ -26,6 +27,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 const BaseButton = styled.button`
+margin: 10px;
   padding: 10px 15px;
   color: #fff;
   border: none;
@@ -43,10 +45,10 @@ export const GreenButton = styled(BaseButton)`
 `;
 
 export const RedButton = styled(BaseButton)`
-  background-color: #ff0000;
+  background-color: #cc0000;
 
   &:hover {
-    background-color: #cc0000;
+    background-color: #aa0000;
   }
 `;
 
@@ -54,7 +56,7 @@ export const BigBlueButton = styled(BaseButton)`
   background-color: #004499;
 
   &:hover {
-    background-color: #0044cc;
+    background-color: #003377;
   }
 `;
 
@@ -162,4 +164,16 @@ export const LoadingText = styled.p`
   background: rgba(0, 0, 0, 0.7);
   padding: 16px;
   border-radius: 8px;
+`;
+
+export const StyledDatePicker = styled(DatePicker)`
+  font-family: Arial, sans-serif;
+  background-color: #e6f0ff;
+  color: #333;
+  border-radius: 4px;
+  border: 1px solid #ccc; 
+  padding: 8px; 
+  margin-bottom: 10px;
+  cursor: pointer; 
+ 
 `;
